@@ -1,0 +1,19 @@
+services:
+
+  vite-react-frontend:
+    build:
+      context: ./frontend
+    stdin_open: true
+    ports:
+      - "5173:5173"
+    networks:
+      - app-network
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+
+networks:
+  app-network:
+    driver: bridge
