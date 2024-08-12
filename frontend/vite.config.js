@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://host.docker.internal:5000",
+        target: "http://express-nodejs-backend:5000",
         changeOrigin: true,
         secure: false,
       },
