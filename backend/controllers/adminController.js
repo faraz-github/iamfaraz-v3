@@ -18,44 +18,39 @@ const registerAdmin = asyncHandler(async (req, res) => {
   const { name, email, picture, password } = req.body;
 
   if (name || email || password) {
-    const foundAdmin = await Admin.find();
-    if (foundAdmin.length !== 0) {
-      res.status(400);
-      throw new Error("Admin Informaton already exists");
-    } else {
-      const saltRounds = process.env.SALT_ROUNDS;
-      const salt = await bcrypt.genSalt(parseInt(saltRounds)); // because environment variables are treated as string and bcrypt needs an integer number
-      const hash = await bcrypt.hash(password, salt);
+    const saltRounds = process.env.SALT_ROUNDS;
+    const salt = await bcrypt.genSalt(parseInt(saltRounds)); // because environment variables are treated as string and bcrypt needs an integer number
+    const hash = await bcrypt.hash(password, salt);
 
-      const admin = await Admin.create({
-        name: name,
-        email: email,
-        picture: picture,
-        password: hash,
-      });
+    const admin = await Admin.create({
+      name: name,
+      email: email,
+      picture: picture,
+      password: hash,
+    });
 
-      if (admin) {
-        res.status(201);
-        const sendTo = admin.email;
-        const token = generateToken(admin._id);
-        const url = `http://localhost:5000/api/admin/confirmation/${token}`; // after deploy change it to deployes url
+    if (admin) {
+      res.status(201);
+      const sendTo = admin.email;
+      const token = generateToken(admin._id);
+      const url = `http://localhost:5000/api/admin/confirmation/${token}`; // TODO after deploy change it to deployes url
 
-        const info = await sendMail(sendTo, url);
-        if (info) {
-          if (info.accepted[0] === sendTo) {
-            res.status(200);
-            res.send({
-              token: token,
-            });
-          }
-        } else {
-          res.status(400);
-          throw new Error("Failed to send confirmation email");
+      const info = await sendMail(sendTo, url);
+
+      if (info) {
+        if (info.accepted[0] === sendTo) {
+          res.status(200);
+          res.send({
+            token: token,
+          });
         }
       } else {
         res.status(400);
-        throw new Error("Failed to create an admin");
+        throw new Error("Failed to send confirmation email");
       }
+    } else {
+      res.status(400);
+      throw new Error("Failed to create an admin");
     }
   } else {
     res.status(400);
@@ -68,7 +63,7 @@ const resendEmail = asyncHandler(async (req, res) => {
   const { token } = req.body;
 
   const sendTo = email;
-  const url = `http://localhost:5000/api/admin/confirmation/${token}`; // after deploy change it to deployes url
+  const url = `http://localhost:5000/api/admin/confirmation/${token}`; // TODO after deploy change it to deployes url
 
   const info = await sendMail(sendTo, url);
   console.log({ info });
@@ -95,7 +90,7 @@ const confirmEmail = asyncHandler(async (req, res) => {
   );
   if (response) {
     res.status(200);
-    res.redirect("http://localhost:3000/dashboard"); // change this after deploy or remove locahost
+    res.redirect("http://localhost:5173/dashboard"); // TODO change this after deploy or remove locahost
   } else {
     res.status(400);
     throw new Error("Failed to varify email");
@@ -132,14 +127,14 @@ const loginAdmin = asyncHandler(async (req, res) => {
 });
 
 const getAdminProfile = (req, res) => {
-  const { name, email, picture, password, verified } = req.admin;
+  const { name, email, picture, verified, role } = req.admin;
   res.status(200);
   res.send({
     name,
     email,
     picture,
-    password,
     verified,
+    role,
   });
 };
 
@@ -180,6 +175,51 @@ const revokeAdmin = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Admin rights revoked" });
 });
 
+//----------------------------------------------------------------Controllers - Admin
+
+const readAdminInfo = asyncHandler(async (req, res) => {
+  const foundAdmins = await Admin.find();
+  if (foundAdmins.length) {
+    res.status(200);
+    res.send(foundAdmins);
+  } else {
+    res.status(400);
+    throw new Error("Admins information not found");
+  }
+});
+
+const updateAdminInfo = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { verified, role } = req.body;
+
+  const admin = {
+    verified,
+    role,
+  };
+
+  const updateAdmin = await Admin.updateOne({ _id: id }, admin);
+
+  if (updateAdmin) {
+    res.status(200);
+    res.send(updateAdmin);
+  } else {
+    res.status(400);
+    throw new Error("Cannot Update");
+  }
+});
+
+const deleteAdminInfo = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const deleteAdmin = await Admin.deleteOne({ _id: id });
+  if (deleteAdmin) {
+    res.status(200);
+    res.send(deleteAdmin);
+  } else {
+    res.status(400);
+    throw new Error("Cannot Delete");
+  }
+});
+
 module.exports = {
   registerAdmin,
   resendEmail,
@@ -188,4 +228,7 @@ module.exports = {
   getAdminProfile,
   grantAdmin,
   revokeAdmin,
+  readAdminInfo,
+  updateAdminInfo,
+  deleteAdminInfo,
 };

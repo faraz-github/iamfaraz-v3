@@ -10,6 +10,9 @@ const {
   getAdminProfile,
   grantAdmin,
   revokeAdmin,
+  readAdminInfo,
+  updateAdminInfo,
+  deleteAdminInfo,
 } = require("../controllers/adminController");
 
 // Middleware
@@ -60,6 +63,32 @@ router.post(
   protectedRoute,
   authorizeRole("superAdmin"),
   revokeAdmin
+);
+
+//----------------------------------------------------------------Admin Routes
+// @desc    Read admin information
+// @route   GET /api/admin/all
+// @access  Private
+router.get("/all", protectedRoute, authorizeRole("superAdmin"), readAdminInfo);
+
+// @desc    Update admin information
+// @route   PATCH /api/admin/selected/:id
+// @access  Private
+router.patch(
+  "/selected/:id",
+  protectedRoute,
+  authorizeRole("superAdmin"),
+  updateAdminInfo
+);
+
+// @desc    Delete admin information
+// @route   DELETE /api/admin/selected/:id
+// @access  Private
+router.delete(
+  "/selected/:id",
+  protectedRoute,
+  authorizeRole("superAdmin"),
+  deleteAdminInfo
 );
 
 module.exports = router;
