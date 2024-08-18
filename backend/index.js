@@ -21,18 +21,18 @@ app.use("/api/info", require("./routes/infoRoutes"));
 
 //----------------------------------------------------------------SERVE FRONTEND
 if (process.env.NODE_ENV === "production") {
-  console.log(express.static(path.join(__dirname, "../", "./frontend/build")));
-  // E:\DevSpace\Projects\GitHub\farazahmad.email\Private\iamfaraz\frontend\build
-  // frontend\build
+  console.log(express.static(path.join(__dirname, "../", "./frontend/dist")));
+  // E:\DevSpace\Projects\Local\iamfaraz-v3\frontend\dist
+  // frontend\dist
 
-  app.use(express.static(path.join(__dirname, "../", "./frontend/build")));
+  app.use(express.static(path.join(__dirname, "../", "./frontend/dist")));
 
-  console.log(express.static(path.join(__dirname, "../", "./frontend/build")));
-  // E:\DevSpace\Projects\GitHub\farazahmad.email\Private\iamfaraz\frontend\build\index.html
-  // frontend\build\index.html
+  console.log(express.static(path.join(__dirname, "../", "./frontend/dist")));
+  // E:\DevSpace\Projects\Local\iamfaraz-v3\frontend\dist\index.html
+  // frontend\dist\index.html
   app.get("*", (req, res) =>
     res.sendFile(
-      path.resolve(__dirname, "../", "./", "frontend", "build", "index.html")
+      path.resolve(__dirname, "../", "./", "frontend", "dist", "index.html")
     )
   );
 } else {

@@ -11,7 +11,7 @@ const authorizeRole = (...roles) => {
         throw new Error("No token found");
       }
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const admin = await Admin.findById(decoded.id);
+      const admin = await Admin.findById(decoded.id).select("-password"); // because we used id as the payload to sign the jwt token | since we dont want password we use minus -password
 
       if (!roles.includes(admin.role)) {
         res.status(403);

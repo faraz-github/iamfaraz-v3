@@ -28,12 +28,15 @@ const registerAdmin = asyncHandler(async (req, res) => {
       picture: picture,
       password: hash,
     });
-
+    
     if (admin) {
       res.status(201);
       const sendTo = admin.email;
       const token = generateToken(admin._id);
-      const url = `http://localhost:5000/api/admin/confirmation/${token}`; // TODO after deploy change it to deployes url
+      const url =
+        process.env.NODE_ENV === "development"
+          ? `${process.env.DEVELOPMENT_HOST_BACKEND}/api/admin/confirmation/${token}`
+          : `${process.env.PRODUCTION_HOST}/api/admin/confirmation/${token}`;
 
       const info = await sendMail(sendTo, url);
 
@@ -63,7 +66,10 @@ const resendEmail = asyncHandler(async (req, res) => {
   const { token } = req.body;
 
   const sendTo = email;
-  const url = `http://localhost:5000/api/admin/confirmation/${token}`; // TODO after deploy change it to deployes url
+  const url =
+    process.env.NODE_ENV === "development"
+      ? `${process.env.DEVELOPMENT_HOST_BACKEND}/api/admin/confirmation/${token}`
+      : `${process.env.PRODUCTION_HOST}/api/admin/confirmation/${token}`;
 
   const info = await sendMail(sendTo, url);
   console.log({ info });
@@ -90,7 +96,11 @@ const confirmEmail = asyncHandler(async (req, res) => {
   );
   if (response) {
     res.status(200);
-    res.redirect("http://localhost:5173/dashboard"); // TODO change this after deploy or remove locahost
+    res.redirect(
+      process.env.NODE_ENV === "development"
+        ? `${process.env.DEVELOPMENT_HOST_FRONTEND}/dashboard`
+        : `${process.env.PRODUCTION_HOST}/dashboard`
+    );
   } else {
     res.status(400);
     throw new Error("Failed to varify email");
