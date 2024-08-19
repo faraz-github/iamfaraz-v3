@@ -73,6 +73,13 @@ export default function ButtonAppBar() {
                     </Typography>
                     <Button variant='contained' onClick={logoutAdmin}>LogOut</Button>
                 </Toolbar>
+            case "/pending":
+                return <Toolbar>
+                    <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        Portfolio-Second
+                    </Typography>
+                    <Button variant='contained' onClick={logoutAdmin}>LogOut</Button>
+                </Toolbar>
             default:
                 console.log(location.pathname);
         }

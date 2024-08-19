@@ -26,6 +26,8 @@ function Dashboard() {
         } else if (admin) {
             if (!admin.verified) {
                 navigate("/resend")
+            } else if (admin.role === "pending") {
+                navigate("/pending")
             }
         }
 
