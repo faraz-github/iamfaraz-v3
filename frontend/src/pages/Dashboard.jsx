@@ -12,6 +12,7 @@ import ContactDetails from "../components/ContactDetails";
 import PlatformDetails from "../components/PlatformDetails";
 import ToolDetails from "../components/ToolDetails";
 import PortfolioDetails from "../components/PortfolioDetails";
+import AdminDetails from "../components/AdminDetails";
 
 function Dashboard() {
 
@@ -43,6 +44,9 @@ function Dashboard() {
     //------------------------------------------------------------------------------------------- Render Helper
     const renderManagerCard = () => {
         switch (manager) {
+            case "admin":
+                return <AdminDetails />;
+
             case "personal":
                 return <PersonalDetails />;
 
@@ -73,6 +77,12 @@ function Dashboard() {
                     onChange={handleManager}
                     sx={{ my: 1 }}
                 >
+                    {
+                        admin && admin.role === "superAdmin" && (<ToggleButton value="admin">
+                        Admin
+                        </ToggleButton>)
+                    }
+                    
                     <ToggleButton value="personal">
                         Personal
                     </ToggleButton>
