@@ -234,14 +234,15 @@ const deletePlatformInfo = asyncHandler(async (req, res) => {
 //----------------------------------------------------------------Controllers - Tool
 const createToolInfo = asyncHandler(async (req, res) => {
 
-    const { name, type, description, link, icon } = req.body;
+    const { name, type, description, link, icon, category } = req.body;
 
     const tool = await Tool.create({
         name,
         type,
         description,
         link,
-        icon
+        icon,
+        category
     });
 
     if (tool) {
@@ -268,14 +269,15 @@ const readToolInfo = asyncHandler(async (req, res) => {
 const updateToolInfo = asyncHandler(async (req, res) => {
 
     const { id } = req.params;
-    const { name, type, description, link, icon } = req.body;
+    const { name, type, description, link, icon, category } = req.body;
 
     const tool = {
         name,
         type,
         description,
         link,
-        icon
+        icon,
+        category
     };
 
     const updateTool = await Tool.updateOne({ _id: id }, tool);

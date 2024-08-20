@@ -29,7 +29,11 @@ const toolSchema = new mongoose.Schema({
     type: String,
     description: String,
     link: String,
-    icon: String
+    icon: String,
+    category: {
+        type: String,
+        enum: ["design", "development"],
+    },
 });
 
 const portfolioSchema = new mongoose.Schema({
