@@ -41,6 +41,9 @@ const portfolioSchema = new mongoose.Schema({
     type: String,
     description: String,
     picture: String,
+    firstScreen: String,
+    secondScreen: String,
+    lastScreen: String,
     stack: [String],
     link: String,
     source: String

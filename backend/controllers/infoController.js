@@ -306,13 +306,16 @@ const deleteToolInfo = asyncHandler(async (req, res) => {
 //----------------------------------------------------------------Controllers - Portfolio
 const createPortfolioInfo = asyncHandler(async (req, res) => {
 
-    const { name, type, description, picture, stack, link, source } = req.body;
+    const { name, type, description, picture, firstScreen, secondScreen, lastScreen, stack, link, source } = req.body;
 
     const portfolio = await Portfolio.create({
         name,
         type,
         description,
         picture,
+        firstScreen,
+        secondScreen,
+        lastScreen,
         stack,
         link,
         source
@@ -342,13 +345,16 @@ const readPortfolioInfo = asyncHandler(async (req, res) => {
 const updatePortfolioInfo = asyncHandler(async (req, res) => {
 
     const { id } = req.params;
-    const { name, type, description, picture, stack, link, source } = req.body;
+    const { name, type, description, picture, firstScreen, secondScreen, lastScreen, stack, link, source } = req.body;
 
     const portfolio = {
         name,
         type,
         description,
         picture,
+        firstScreen, 
+        secondScreen, 
+        lastScreen,
         stack,
         link,
         source
