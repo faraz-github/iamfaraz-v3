@@ -6,18 +6,20 @@ const { Personal, Contact, Platform, Tool, Portfolio } = require("../models/info
 //----------------------------------------------------------------Controllers - Personal
 const createPersonalInfo = asyncHandler(async (req, res) => {
 
-    const { name, profession, picture } = req.body;
-    if (name, profession, picture) {
+    const { name, profession, picture, platform, status } = req.body;
+    if (name, profession, picture, platform, status) {
 
         const foundPersonal = await Personal.find();
         if (foundPersonal.length !== 0) {
             res.status(400);
-            throw new Error("Personal Informaton already exists");
+            throw new Error("Personal informaton already exists");
         } else {
             const personal = await Personal.create({
                 name,
                 profession,
-                picture
+                picture,
+                platform,
+                status
             });
 
             if (personal) {
@@ -33,7 +35,6 @@ const createPersonalInfo = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Please input all fields");
     }
-
 
 });
 
@@ -51,12 +52,14 @@ const readPersonalInfo = asyncHandler(async (req, res) => {
 const updatePersonalInfo = asyncHandler(async (req, res) => {
 
     const { id } = req.params;
-    const { name, profession, picture } = req.body;
+    const { name, profession, picture, platform, status } = req.body;
 
     const personal = {
         name,
         profession,
-        picture
+        picture,
+        platform,
+        status
     };
 
     const updatePersonal = await Personal.updateOne({ _id: id }, personal);

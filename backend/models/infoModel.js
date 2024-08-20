@@ -4,7 +4,9 @@ const mongoose = require("mongoose");
 const personalSchema = new mongoose.Schema({
     name: String,
     profession: [String],
-    picture: String
+    picture: String,
+    platform:[String],
+    status: { type: String, enum: ['available', 'busyQuick', 'busyLong', 'break'], default: 'available' },
 }, { timestamps: true });
 
 const contactSchema = new mongoose.Schema({
