@@ -18,6 +18,7 @@ app.use(express.urlencoded({ limit: "50mb", extended: false }));
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/upload", require("./routes/uploadRoutes"));
 app.use("/api/info", require("./routes/infoRoutes"));
+app.use("/api/client", require("./routes/clientRoutes"));
 
 //----------------------------------------------------------------SERVE FRONTEND
 if (process.env.NODE_ENV === "production") {
