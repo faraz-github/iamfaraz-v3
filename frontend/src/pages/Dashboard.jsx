@@ -15,94 +15,79 @@ import PortfolioDetails from "../components/PortfolioDetails";
 import AdminDetails from "../components/AdminDetails";
 
 function Dashboard() {
+  const navigate = useNavigate();
+  const { admin } = useAdmin();
 
-    const navigate = useNavigate();
-    const { admin } = useAdmin();
-
-    // =========================================================================================== USE EFFECT
-    useEffect(() => {
-
-        if (!admin) {
-            navigate("/login");
-        } else if (admin) {
-            if (!admin.verified) {
-                navigate("/resend")
-            } else if (admin.role === "pending") {
-                navigate("/pending")
-            }
-        }
-
-    }, [admin, navigate]);
-
-    // =========================================================================================== USE STATE
-    const [manager, setManager] = useState("personal");
-    const handleManager = (event, newValue) => {
-        if (newValue !== null) {
-            setManager(newValue);
-        }
+  // =========================================================================================== USE EFFECT
+  useEffect(() => {
+    if (!admin) {
+      navigate("/login");
+    } else if (admin) {
+      if (!admin.verified) {
+        navigate("/resend");
+      } else if (admin.role === "pending") {
+        navigate("/pending");
+      }
     }
-    //------------------------------------------------------------------------------------------- Render Helper
-    const renderManagerCard = () => {
-        switch (manager) {
-            case "admin":
-                return <AdminDetails />;
+  }, [admin, navigate]);
 
-            case "personal":
-                return <PersonalDetails />;
-
-            case "contact":
-                return <ContactDetails />;
-
-            case "platform":
-                return <PlatformDetails />;
-
-            case "tool":
-                return <ToolDetails />;
-
-            case "portfolio":
-                return <PortfolioDetails />;
-
-            default:
-                console.log(manager);
-        }
+  // =========================================================================================== USE STATE
+  const [manager, setManager] = useState("personal");
+  const handleManager = (event, newValue) => {
+    if (newValue !== null) {
+      setManager(newValue);
     }
+  };
+  //------------------------------------------------------------------------------------------- Render Helper
+  const renderManagerCard = () => {
+    switch (manager) {
+      case "admin":
+        return <AdminDetails />;
 
-    // =========================================================================================== RENDER
-    return (
-        <Container className="viewportContainer">
-            <center>
-                <ToggleButtonGroup
-                    value={manager}
-                    exclusive
-                    onChange={handleManager}
-                    sx={{ my: 1 }}
-                >
-                    {
-                        admin && admin.role === "superAdmin" && (<ToggleButton value="admin">
-                        Admin
-                        </ToggleButton>)
-                    }
-                    
-                    <ToggleButton value="personal">
-                        Personal
-                    </ToggleButton>
-                    <ToggleButton value="contact">
-                        Contact
-                    </ToggleButton>
-                    <ToggleButton value="platform">
-                        Platform
-                    </ToggleButton>
-                    <ToggleButton value="tool">
-                        Tool
-                    </ToggleButton>
-                    <ToggleButton value="portfolio">
-                        Portfolio
-                    </ToggleButton>
-                </ToggleButtonGroup>
-            </center>
-            {renderManagerCard()}
-        </Container>
-    )
+      case "personal":
+        return <PersonalDetails />;
+
+      case "contact":
+        return <ContactDetails />;
+
+      case "platform":
+        return <PlatformDetails />;
+
+      case "tool":
+        return <ToolDetails />;
+
+      case "portfolio":
+        return <PortfolioDetails />;
+
+      default:
+        console.log(manager);
+    }
+  };
+
+  // =========================================================================================== RENDER
+  return (
+    <Container className="viewportContainer">
+      <center>
+        <ToggleButtonGroup
+          value={manager}
+          exclusive
+          onChange={handleManager}
+          sx={{ my: 1 }}
+        >
+          {admin && admin.role === "superAdmin" && (
+            <ToggleButton value="admin">Admin</ToggleButton>
+          )}
+
+          <ToggleButton value="personal">Personal</ToggleButton>
+          <ToggleButton value="contact">Contact</ToggleButton>
+          <ToggleButton value="platform">Platform</ToggleButton>
+          <ToggleButton value="tool">Tool</ToggleButton>
+          <ToggleButton value="portfolio">Portfolio</ToggleButton>
+        </ToggleButtonGroup>
+      </center>
+      {renderManagerCard()}
+    </Container>
+  );
 }
 
 export default Dashboard;
