@@ -47,8 +47,23 @@ const uploadPortfolioPicture = asyncHandler(async (req, res) => {
     }
 });
 
+const uploadClientPicture = asyncHandler(async (req, res) => {
+    const { imageString, clientProjectName } = req.body;
+    const uploadResponse = await cloudinary.uploader.upload(imageString, {
+        folder: `MyPortfolioMedia/Client_Pictures/${clientProjectName.toUpperCase()}`
+    });
+    if (uploadResponse.asset_id) {
+        res.status(200);
+        res.send(uploadResponse);
+    } else {
+        res.status(400);
+        throw new Error("Failed to upload portfolio picture")
+    }
+});
+
 module.exports = {
     uploadAdminPicture,
     uploadToolIconPicture,
-    uploadPortfolioPicture
+    uploadPortfolioPicture,
+    uploadClientPicture
 }

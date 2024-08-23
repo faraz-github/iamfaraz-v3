@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const { uploadAdminPicture, uploadToolIconPicture, uploadPortfolioPicture } = require("../controllers/uploadController");
+const { uploadAdminPicture, uploadToolIconPicture, uploadPortfolioPicture, uploadClientPicture } = require("../controllers/uploadController");
 
 //----------------------------------------------------------------Upload Routes
 // @desc    Upload admin profile picture
@@ -16,5 +16,9 @@ router.post("/tool/picture", uploadToolIconPicture);
 // @route   POST /api/upload/portfolio/picture
 // @access  Public
 router.post("/portfolio/picture", uploadPortfolioPicture);
+// @desc    Upload client picture
+// @route   POST /api/upload/client/picture
+// @access  Public
+router.post("/client/picture", uploadClientPicture);
 
 module.exports = router;
