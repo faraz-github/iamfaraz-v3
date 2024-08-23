@@ -13,6 +13,7 @@ import PlatformDetails from "../components/PlatformDetails";
 import ToolDetails from "../components/ToolDetails";
 import PortfolioDetails from "../components/PortfolioDetails";
 import AdminDetails from "../components/AdminDetails";
+import ClientDetails from "../components/ClientDetails";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -59,6 +60,9 @@ function Dashboard() {
       case "portfolio":
         return <PortfolioDetails />;
 
+      case "client":
+        return <ClientDetails />;
+
       default:
         console.log(manager);
     }
@@ -83,6 +87,7 @@ function Dashboard() {
           <ToggleButton value="platform">Platform</ToggleButton>
           <ToggleButton value="tool">Tool</ToggleButton>
           <ToggleButton value="portfolio">Portfolio</ToggleButton>
+          <ToggleButton value="client">Client</ToggleButton>
         </ToggleButtonGroup>
       </center>
       {renderManagerCard()}
