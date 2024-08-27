@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lancelot&display=swap');
+
+:root {
+    --font-family-primary: "Alumni Sans";
+    --font-family-secondary: "Lancelot";
+    --White: #FFFFFF;
+  }
 
 html,
 body {
@@ -6,7 +14,8 @@ body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
         Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    background-color: #A6D1E6;
+    /* background-color: #A6D1E6; */
+    background-color: var(--White);
 }
 
 a {
@@ -16,6 +25,15 @@ a {
 
 * {
     box-sizing: border-box;
+}
+
+section {
+    min-height: 90vh;
+}
+
+.faraz-ahmad-left-border {
+    width: calc((100vw - 1200px)/2);
+    /* // TODO for the tablet and mobile view we have to calculate this width */
 }
 
 /* All For 100vh in MUI -----> */

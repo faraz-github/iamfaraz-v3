@@ -1,28 +1,35 @@
 import { createTheme } from "@mui/material";
 
+// TODO add pallete for light and dark mode
+
 export const theme = createTheme({
     shape:{
         borderRadius: 10
     },
     palette: {
         primary: {
-            main: "#3D3C42",
-            light: "#636367",
-            dark: "#2a2a2e"
+            main: "#252525",
+            light: "#505050",
+            dark: "#191919"
         },
         secondary: {
-            main: "#7F5283",
-            light: "#98749b",
-            dark: "#58395b"
+            main: "#F35E3E",
+            light: "#f57e64",
+            dark: "#aa412b"
         },
         background: {
-            paper: "#FEFBF6"
+            paper: "#F7F7F7"
         }
     },
     typography: {
-        fontFamily: "'Quicksand','Roboto','Helvetica','Arial',sans-serif",
+        fontFamily: "'Lancelot', 'Alumni Sans', Quicksand','Roboto','Helvetica','Arial',sans-serif",
         h2:{
-            fontWeight: 500
+            fontFamily: "Alumni Sans",
+            fontWeight: 400,
+        },
+        body2:{
+            fontFamily: "Lancelot",
+            fontWeight: 400,
         },
         button: {
             textTransform: "none"

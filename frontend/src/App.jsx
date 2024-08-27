@@ -21,7 +21,7 @@ import ResendVerification from "./pages/ResendVerification";
 import PendingApproval from "./pages/PendingApproval";
 
 // Components
-import Header from "./components/Header";
+import Navbar from "./components/Navbar/Navbar";
 import Loader from "./components/Loader";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <AdminProvider>
         <LoadingProvider>
-          <Header />
+          <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
