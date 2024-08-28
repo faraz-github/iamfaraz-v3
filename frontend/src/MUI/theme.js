@@ -27,6 +27,10 @@ export const theme = createTheme({
             fontFamily: "Alumni Sans",
             fontWeight: 400,
         },
+        h6:{
+            fontFamily: "Lancelot",
+            fontWeight: 400,
+        },
         body2:{
             fontFamily: "Lancelot",
             fontWeight: 400,

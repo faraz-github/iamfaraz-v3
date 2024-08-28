@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 // TODO link to homepage
 
@@ -11,7 +12,14 @@ const FarazAhmad = () => {
       width="fit-content"
       pr={1}
     >
-      <Typography variant="h2" fontSize={48} color={"primary.main"} textTransform={"lowercase"}>
+      <Typography
+        component={Link}
+        to={"/"}
+        variant="h2"
+        fontSize={48}
+        color={"primary.main"}
+        textTransform={"lowercase"}
+      >
         Faraz Ahmad
       </Typography>
     </Box>
