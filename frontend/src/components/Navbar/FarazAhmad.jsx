@@ -1,8 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 
-// TODO link to homepage
-
 const FarazAhmad = () => {
   return (
     <Box

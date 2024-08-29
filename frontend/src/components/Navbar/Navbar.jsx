@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { Link } from "react-router-dom";
 import { Box, Grid, IconButton, Stack } from "@mui/material";
 
@@ -9,11 +7,7 @@ import StatusIndicator from "./StatusIndicator";
 import NavigationHashLink from "./NavigationHashLink";
 import ThemeSwitch from "./ThemeSwitch";
 
-
 const Navbar = () => {
-  // TODO make it context
-  const [colorTheme, setColorTheme] = useState("light");
-
   return (
     <Box marginY={2}>
       <Stack direction={"row"}>
@@ -78,18 +72,11 @@ const Navbar = () => {
                       xs={3}
                       display={"flex"}
                       justifyContent={"flex-end"}
+                      position={"relative"}
                     >
-                      <Stack direction={"row"} spacing={1}>
-                        <ThemeSwitch
-                          mode={"darkMode"}
-                          colorMode={colorTheme}
-                          setColorMode={setColorTheme}
-                        />
-                        <ThemeSwitch
-                          mode={"lightMode"}
-                          colorMode={colorTheme}
-                          setColorMode={setColorTheme}
-                        />
+                      <Stack direction={"row"} spacing={1} position={"absolute"}  top={"-20px"}>
+                        <ThemeSwitch mode={"darkMode"} />
+                        <ThemeSwitch mode={"lightMode"} />
                       </Stack>
                     </Grid>
                   </Grid>
@@ -97,7 +84,6 @@ const Navbar = () => {
               </Grid>
             </Grid>
           </Grid>
-          {/* - // TODO theme switch - change theme */}
         </LayoutContainer>
         <Box className={"faraz-ahmad-left-border"} visibility={"hidden"}></Box>
       </Stack>

@@ -5,12 +5,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import { ThemeProvider } from "@mui/material";
-import { theme } from "./MUI/theme";
+import {
+  CssBaseline,
+  GlobalStyles,
+  ThemeProvider as MUIThemeProvider,
+} from "@mui/material";
+import { lightTheme, darkTheme } from "./MUI/theme";
 
 // Contexts
 import { AdminProvider } from "./contexts/adminContext";
 import { LoadingProvider } from "./contexts/loadingContext";
+import { ThemeProvider, useColorTheme } from "./contexts/themeContext";
 
 // Pages
 import Home from "./pages/Home";
@@ -24,9 +29,22 @@ import PendingApproval from "./pages/PendingApproval";
 import Navbar from "./components/Navbar/Navbar";
 import Loader from "./components/Loader";
 
-function App() {
+function AppContent() {
+  const { theme } = useColorTheme();
+
   return (
-    <ThemeProvider theme={theme}>
+    <MUIThemeProvider theme={theme === "light" ? lightTheme : darkTheme}>
+      <CssBaseline />
+      <GlobalStyles
+        styles={{
+          body: {
+            backgroundColor:
+              theme === "light"
+                ? lightTheme.palette.background.default
+                : darkTheme.palette.background.default,
+          },
+        }}
+      />
       <AdminProvider>
         <LoadingProvider>
           <Navbar />
@@ -42,6 +60,14 @@ function App() {
           <ToastContainer theme="colored" />
         </LoadingProvider>
       </AdminProvider>
+    </MUIThemeProvider>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
     </ThemeProvider>
   );
 }

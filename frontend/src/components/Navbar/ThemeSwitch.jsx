@@ -2,53 +2,58 @@ import { Box, Stack } from "@mui/material";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
-// TODO fix hard coded color problem
-// #F35E3E - secondary.main
-// #FFFFFF - common.white
-// #252525 - primary.main
+import { useColorTheme } from "../../contexts/themeContext";
+import { lightTheme, darkTheme } from "../../MUI/theme";
 
+const ThemeSwitch = ({ mode }) => {
+  const { theme, setDarkTheme, setLightTheme } = useColorTheme();
 
-const ThemeSwitch = ({ mode, colorMode, setColorMode }) => {
+  const secondaryColor = lightTheme.palette.secondary.main;
+  const lightColor  = darkTheme.palette.primary.main;
+  const darkColor = lightTheme.palette.primary.main;
+
   return (
     <Box
       width={40}
       height={
-        mode === "darkMode" && colorMode === "dark"
-          ? 40
-          : mode === "lightMode" && colorMode === "light"
-          ? 40
-          : 30
+        mode === "darkMode" && theme === "dark"
+          ? 60
+          : mode === "lightMode" && theme === "light"
+          ? 60
+          : 40
       }
       bgcolor={"primary.main"}
       position={"relative"}
       sx={{ transition: "height 0.5s ease" }}
     >
-      <center style={{ paddingTop: "5px" }}>
+      <center>
         {mode === "darkMode" ? (
           <DarkModeIcon
-            fontSize="small"
-            htmlColor={colorMode === "dark" ? "#F35E3E" : "#FFFFFF"}
-            onClick={() => setColorMode("dark")}
-            sx={{ cursor: "pointer" }}
+            fontSize="medium"
+            htmlColor={theme === "dark" ? secondaryColor : lightColor}
+            onClick={setDarkTheme}
+            sx={{ cursor: "pointer", my:1 }}
           />
         ) : mode === "lightMode" ? (
           <LightModeIcon
-            fontSize="small"
-            htmlColor={colorMode === "light" ? "#F35E3E" : "#FFFFFF"}
-            onClick={() => setColorMode("light")}
-            sx={{ cursor: "pointer" }}
+            fontSize="medium"
+            htmlColor={theme === "light" ? secondaryColor : darkColor}
+            onClick={setLightTheme}
+            sx={{ cursor: "pointer", my:1 }}
           />
         ) : null}
       </center>
       <Stack direction={"row"} position={"absolute"} bottom={-20}>
         <Box
+          borderTop={"20px solid"}
+          borderColor={(theme)=> theme.palette.primary.main}
           borderRight={"20px solid transparent"}
-          borderTop={"20px solid #252525"}
           borderRadius={"0 0 0 10px"}
         ></Box>
         <Box
+          borderTop={"20px solid"}
+          borderColor={(theme)=> theme.palette.primary.main}
           borderLeft={"20px solid transparent"}
-          borderTop={"20px solid #252525"}
           borderRadius={"0 0 10px 0"}
         ></Box>
       </Stack>
