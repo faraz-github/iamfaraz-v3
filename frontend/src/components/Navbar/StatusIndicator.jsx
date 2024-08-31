@@ -32,7 +32,7 @@ const StatusIndicator = () => {
           borderColor={"success.light"}
           py={0.5}
           px={2}
-          borderRadius={0.5}
+          borderRadius={(theme) => theme.shape.borderRadius}
         >
           <Typography variant="body2" color={"primary.main"}>
             Available for work

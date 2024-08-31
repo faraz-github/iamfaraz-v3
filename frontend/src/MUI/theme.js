@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material";
 
 export const lightTheme = createTheme({
     shape:{
-        borderRadius: 10
+        borderRadius: 2
     },
     palette: {
         mode:"light",
@@ -19,13 +19,27 @@ export const lightTheme = createTheme({
         background: {
             default: "#f5f5f5", // darkTheme | primary.dark
             paper: "#fafafa"
+        },
+        custom:{
+            sectionHeadingColor: "#70838A",
         }
     },
     typography: {
-        fontFamily: "'Lancelot', 'Alumni Sans', Quicksand','Roboto','Helvetica','Arial',sans-serif",
+        h1:{
+            fontFamily: "Lancelot",
+            fontWeight: 400,
+        },
         h2:{
             fontFamily: "Alumni Sans",
             fontWeight: 400,
+        },
+        h3:{
+            fontFamily: "Alumni Sans",
+            fontWeight: 700,
+        },
+        h5:{
+            fontFamily: "Alumni Sans",
+            fontWeight: 500,
         },
         h6:{
             fontFamily: "Lancelot",
@@ -43,10 +57,10 @@ export const lightTheme = createTheme({
 
 export const darkTheme = createTheme({
     shape:{
-        borderRadius: 10
+        borderRadius: 2
     },
     palette: {
-        mode:"light",
+        mode:"dark",
         primary: {
             main: "#FFFFFF",
             light: "#ffffff",
@@ -60,13 +74,27 @@ export const darkTheme = createTheme({
         background: {
             default: "#191919", // lightTheme | primary.dark
             paper: "#fafafa"
+        },
+        custom:{
+            sectionHeadingColor: "#70838A",
         }
     },
     typography: {
-        fontFamily: "'Lancelot', 'Alumni Sans', Quicksand','Roboto','Helvetica','Arial',sans-serif",
+        h1:{
+            fontFamily: "Lancelot",
+            fontWeight: 400,
+        },
         h2:{
             fontFamily: "Alumni Sans",
             fontWeight: 400,
+        },
+        h3:{
+            fontFamily: "Alumni Sans",
+            fontWeight: 700,
+        },
+        h5:{
+            fontFamily: "Alumni Sans",
+            fontWeight: 500,
         },
         h6:{
             fontFamily: "Lancelot",

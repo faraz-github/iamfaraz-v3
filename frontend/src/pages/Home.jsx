@@ -8,7 +8,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import { useAdmin } from "../contexts/adminContext";
 
-import Me from "../components/Me";
+import HeroSection from "../components/HeroSection";
 import Contact from "../components/Contact";
 import Tool from "../components/Tool";
 import Portfolio from "../components/Portfolio";
@@ -37,7 +37,7 @@ function Home() {
 
     return (
         <>
-            <Me />
+            <HeroSection />
             <Tool />
             <Portfolio />
             <Contact />
