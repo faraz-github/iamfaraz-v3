@@ -18,7 +18,7 @@ export const lightTheme = createTheme({
         },
         background: {
             default: "#f5f5f5", // darkTheme | primary.dark
-            paper: "#fafafa"
+            paper: "#FFFFFF"
         },
         custom:{
             sectionHeadingColor: "#70838A",
@@ -73,7 +73,7 @@ export const darkTheme = createTheme({
         },
         background: {
             default: "#191919", // lightTheme | primary.dark
-            paper: "#fafafa"
+            paper: "#5C5C5C"
         },
         custom:{
             sectionHeadingColor: "#70838A",

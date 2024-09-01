@@ -1,3 +1,5 @@
+import { HashLink } from "react-router-hash-link";
+
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
@@ -8,7 +10,7 @@ import { lightTheme } from "../MUI/theme";
 import SectionBox from "./ui/SectionBox";
 import LayoutContainer from "./ui/LayoutContainer";
 import ClientHighlightCard from "./ui/ClientHighlightCard";
-import { HashLink } from "react-router-hash-link";
+import SectionHeading from "./ui/SectionHeading";
 
 const HeroSection = () => {
   const secondaryColor = lightTheme.palette.secondary.main;
@@ -151,15 +153,7 @@ const HeroSection = () => {
             </HashLink>
           </Grid>
         </Grid>
-        <Typography
-          variant="h3"
-          fontSize={32}
-          color={"custom.sectionHeadingColor"}
-          mt={2}
-          gutterBottom
-        >
-          Highlights
-        </Typography>
+        <SectionHeading heading="Highlights" />
         <Grid container>
           <Grid item xs={3}>
             <ClientHighlightCard

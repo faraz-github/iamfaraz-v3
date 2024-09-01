@@ -25,7 +25,7 @@ const ClientHighlightCard = ({ title, description, logo }) => {
         height={50}
         borderRadius={"50%"}
         sx={{
-          background: theme === "light" ? "white" : "#5C5C5C",
+          background: (theme) => theme.palette.background.paper,
           position: "absolute",
           right: 0,
           display: "flex",

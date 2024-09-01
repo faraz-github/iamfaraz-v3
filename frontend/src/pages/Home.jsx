@@ -9,6 +9,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { useAdmin } from "../contexts/adminContext";
 
 import HeroSection from "../components/HeroSection";
+import ProjectSection from "../components/ProjectSection";
 import Contact from "../components/Contact";
 import Tool from "../components/Tool";
 import Portfolio from "../components/Portfolio";
@@ -38,6 +39,7 @@ function Home() {
     return (
         <>
             <HeroSection />
+            <ProjectSection />
             <Tool />
             <Portfolio />
             <Contact />
