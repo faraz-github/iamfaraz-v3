@@ -15,7 +15,7 @@ const ProjectCard = ({ title, description, tools, images }) => {
         >
           {title}
         </Typography>
-        <StyledLine color={"secondary.main"} thickness={2} leftMargin={1} />
+        <StyledLine color={"secondary.main"} thickness={2} rightOrnament leftMargin={1} />
       </Box>
       <Typography
         variant="body2"

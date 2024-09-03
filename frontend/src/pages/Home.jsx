@@ -10,6 +10,7 @@ import { useAdmin } from "../contexts/adminContext";
 
 import HeroSection from "../components/HeroSection";
 import ProjectSection from "../components/ProjectSection";
+import CapabilitySection from "../components/CapabilitySection";
 import Contact from "../components/Contact";
 import Tool from "../components/Tool";
 import Portfolio from "../components/Portfolio";
@@ -40,6 +41,7 @@ function Home() {
         <>
             <HeroSection />
             <ProjectSection />
+            <CapabilitySection />
             <Tool />
             <Portfolio />
             <Contact />

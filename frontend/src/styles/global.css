@@ -25,11 +25,7 @@ a {
     box-sizing: border-box;
 }
 
-section {
-    min-height: 90vh;
-}
-
-.faraz-ahmad-left-border {
+.horizontalMarginWidth {
     width: calc((100vw - 1200px)/2);
     /* // TODO for the tablet and mobile view we have to calculate this width */
 }

@@ -12,7 +12,7 @@ const Navbar = () => {
     <Box marginY={2}>
       <Stack direction={"row"}>
         <Box
-          className={"faraz-ahmad-left-border"}
+          className={"horizontalMarginWidth"}
           border={"1px dashed"}
           borderColor={"primary.main"}
           borderLeft={0}
@@ -85,7 +85,7 @@ const Navbar = () => {
             </Grid>
           </Grid>
         </LayoutContainer>
-        <Box className={"faraz-ahmad-left-border"} visibility={"hidden"}></Box>
+        <Box className={"horizontalMarginWidth"} visibility={"hidden"}></Box>
       </Stack>
     </Box>
   );
