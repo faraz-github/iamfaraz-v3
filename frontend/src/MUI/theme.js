@@ -22,6 +22,7 @@ export const lightTheme = createTheme({
         },
         custom:{
             sectionHeadingColor: "#70838A",
+            retroInnerShadowColor: 'rgba(37, 37, 37, 0.5)', 
         }
     },
     typography: {
@@ -77,6 +78,7 @@ export const darkTheme = createTheme({
         },
         custom:{
             sectionHeadingColor: "#70838A",
+            retroInnerShadowColor: 'rgba(255, 255, 255, 0.5)', 
         }
     },
     typography: {

@@ -15,6 +15,7 @@ import Contact from "../components/Contact";
 import Tool from "../components/Tool";
 import Portfolio from "../components/Portfolio";
 import Footer from "../components/Footer";
+import SkillSection from "../components/SkillSection";
 
 function Home() {
 
@@ -42,6 +43,7 @@ function Home() {
             <HeroSection />
             <ProjectSection />
             <CapabilitySection />
+            <SkillSection />
             <Tool />
             <Portfolio />
             <Contact />
