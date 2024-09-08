@@ -16,6 +16,7 @@ import Tool from "../components/Tool";
 import Portfolio from "../components/Portfolio";
 import Footer from "../components/Footer";
 import SkillSection from "../components/SkillSection";
+import ContactSection from "../components/ContactSection";
 
 function Home() {
 
@@ -44,6 +45,7 @@ function Home() {
             <ProjectSection />
             <CapabilitySection />
             <SkillSection />
+            <ContactSection />
             <Tool />
             <Portfolio />
             <Contact />
