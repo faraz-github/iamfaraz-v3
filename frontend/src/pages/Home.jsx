@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { Fab } from "@mui/material";
 
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 import { useAdmin } from "../contexts/adminContext";
 
@@ -35,8 +35,7 @@ function Home() {
       } else {
         setBackToTop(true);
       }
-        }
-
+    };
   }, [admin, navigate]);
 
   return (
@@ -47,21 +46,20 @@ function Home() {
       <SkillSection />
       <ContactSection />
       <FooterSection />
-      <Tool />
-      <Portfolio />
-      <Contact />
-      <Footer />
-            {
-                backToTop && <Fab onClick={() => window.scrollTo(0, 0)} sx={{
-                    position: 'fixed',
+      {backToTop && (
+        <Fab
+          onClick={() => window.scrollTo(0, 0)}
+          sx={{
+            position: "fixed",
             bottom: 16,
-                    right: 16
-                }}>
+            right: 16,
+          }}
+        >
           <KeyboardArrowUpIcon />
         </Fab>
-            }
+      )}
     </>
-    )
+  );
 }
 
 export default Home;
