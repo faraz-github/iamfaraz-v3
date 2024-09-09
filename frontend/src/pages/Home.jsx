@@ -17,49 +17,50 @@ import Portfolio from "../components/Portfolio";
 import Footer from "../components/Footer";
 import SkillSection from "../components/SkillSection";
 import ContactSection from "../components/ContactSection";
+import FooterSection from "../components/FooterSection";
 
 function Home() {
+  const navigate = useNavigate();
+  const { admin } = useAdmin();
 
-    const navigate = useNavigate();
-    const { admin } = useAdmin();
+  // Back to Top Button
+  const [backToTop, setBackToTop] = useState(false);
 
-    // Back to Top Button
-    const [backToTop, setBackToTop] = useState(false);
+  useEffect(() => {
+    if (admin) navigate("/dashboard");
 
-    useEffect(() => {
-        if (admin) navigate("/dashboard");
-
-        window.onscroll = () => {
-            if (window.scrollY === 0) {
-                setBackToTop(false);
-            } else {
-                setBackToTop(true);
-            }
+    window.onscroll = () => {
+      if (window.scrollY === 0) {
+        setBackToTop(false);
+      } else {
+        setBackToTop(true);
+      }
         }
 
-    }, [admin, navigate]);
+  }, [admin, navigate]);
 
-    return (
-        <>
-            <HeroSection />
-            <ProjectSection />
-            <CapabilitySection />
-            <SkillSection />
-            <ContactSection />
-            <Tool />
-            <Portfolio />
-            <Contact />
-            <Footer />
+  return (
+    <>
+      <HeroSection />
+      <ProjectSection />
+      <CapabilitySection />
+      <SkillSection />
+      <ContactSection />
+      <FooterSection />
+      <Tool />
+      <Portfolio />
+      <Contact />
+      <Footer />
             {
                 backToTop && <Fab onClick={() => window.scrollTo(0, 0)} sx={{
                     position: 'fixed',
-                    bottom: 16,
+            bottom: 16,
                     right: 16
                 }}>
-                    <KeyboardArrowUpIcon />
-                </Fab>
+          <KeyboardArrowUpIcon />
+        </Fab>
             }
-        </>
+    </>
     )
 }
 
