@@ -12,7 +12,7 @@ import ContactDetails from "../components/ContactDetails";
 import PlatformDetails from "../components/PlatformDetails";
 import ToolDetails from "../components/ToolDetails";
 import PortfolioDetails from "../components/PortfolioDetails";
-import AdminDetails from "../components/AdminDetails";
+import AdminDetails from "../components/Dashboard/AdminDetails";
 import ClientDetails from "../components/ClientDetails";
 
 function Dashboard() {
