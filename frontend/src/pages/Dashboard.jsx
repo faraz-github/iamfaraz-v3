@@ -7,12 +7,12 @@ import { useNavigate } from "react-router-dom";
 import { useAdmin } from "../contexts/adminContext";
 
 // Components
-import PersonalDetails from "../components/PersonalDetails";
+import AdminDetails from "../components/Dashboard/AdminDetails";
+import PersonalDetails from "../components/Dashboard/PersonalDetails";
 import ContactDetails from "../components/ContactDetails";
 import PlatformDetails from "../components/PlatformDetails";
 import ToolDetails from "../components/ToolDetails";
 import PortfolioDetails from "../components/PortfolioDetails";
-import AdminDetails from "../components/Dashboard/AdminDetails";
 import ClientDetails from "../components/ClientDetails";
 
 function Dashboard() {
