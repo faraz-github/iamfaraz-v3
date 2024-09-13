@@ -11,10 +11,6 @@ const {
   readContactInfo,
   updateContactInfo,
   deleteContactInfo,
-  createPlatformInfo,
-  readPlatformInfo,
-  updatePlatformInfo,
-  deletePlatformInfo,
   createToolInfo,
   readToolInfo,
   updateToolInfo,
@@ -92,38 +88,6 @@ router.delete(
   protectedRoute,
   authorizeRole("superAdmin"),
   deleteContactInfo
-);
-//----------------------------------------------------------------Info Routes - Platform
-// @desc    Create development platform information
-// @route   POST /api/info/platform
-// @access  Private
-router.post(
-  "/platform",
-  protectedRoute,
-  authorizeRole("superAdmin"),
-  createPlatformInfo
-);
-// @desc    Read development platform information
-// @route   GET /api/info/platform
-// @access  Public
-router.get("/platform", readPlatformInfo);
-// @desc    Update development platform information
-// @route   PATCH /api/info/platform/:id
-// @access  Private
-router.patch(
-  "/platform/:id",
-  protectedRoute,
-  authorizeRole("superAdmin"),
-  updatePlatformInfo
-);
-// @desc    Delete development platform information
-// @route   DELETE /api/info/platform/:id
-// @access  Private
-router.delete(
-  "/platform/:id",
-  protectedRoute,
-  authorizeRole("superAdmin"),
-  deletePlatformInfo
 );
 //----------------------------------------------------------------Info Routes - Toolset
 // @desc    Create toolset information

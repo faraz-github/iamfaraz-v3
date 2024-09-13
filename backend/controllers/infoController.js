@@ -1,7 +1,7 @@
 const e = require("express");
 const asyncHandler = require("express-async-handler");
 
-const { Personal, Contact, Platform, Tool, Portfolio } = require("../models/infoModel");
+const { Personal, Contact, Tool, Portfolio } = require("../models/infoModel");
 
 //----------------------------------------------------------------Controllers - Personal
 const createPersonalInfo = asyncHandler(async (req, res) => {
@@ -169,68 +169,6 @@ const deleteContactInfo = asyncHandler(async (req, res) => {
         throw new Error("Cannot Delete");
     }
 });
-//----------------------------------------------------------------Controllers - Platform
-const createPlatformInfo = asyncHandler(async (req, res) => {
-
-    const { platformName } = req.body;
-
-    const platform = await Platform.create({
-        platformName
-    });
-
-    if (platform) {
-        res.status(201);
-        res.send(platform);
-    } else {
-        res.status(400);
-        throw new Error("Failed to create platform information")
-    }
-
-});
-
-const readPlatformInfo = asyncHandler(async (req, res) => {
-    const foundPlatform = await Platform.find();
-    if (foundPlatform.length) {
-        res.status(200);
-        res.send(foundPlatform);
-    } else {
-        res.status(400);
-        throw new Error("Platform information not found")
-    }
-});
-
-const updatePlatformInfo = asyncHandler(async (req, res) => {
-
-    const { id } = req.params;
-    const { platformName } = req.body;
-
-    const platform = {
-        platformName
-    };
-
-    const updatePlatform = await Platform.updateOne({ _id: id }, platform);
-
-    if (updatePlatform) {
-        res.status(200);
-        res.send(updatePlatform);
-    } else {
-        res.status(400);
-        throw new Error("Cannot Update")
-    }
-
-});
-
-const deletePlatformInfo = asyncHandler(async (req, res) => {
-    const { id } = req.params;
-    const deletePlatform = await Platform.deleteOne({ _id: id });
-    if (deletePlatform) {
-        res.status(200);
-        res.send(deletePlatform);
-    } else {
-        res.status(400);
-        throw new Error("Cannot Delete");
-    }
-});
 //----------------------------------------------------------------Controllers - Tool
 const createToolInfo = asyncHandler(async (req, res) => {
 
@@ -388,7 +326,6 @@ const deletePortfolioInfo = asyncHandler(async (req, res) => {
 module.exports = {
     createPersonalInfo, readPersonalInfo, updatePersonalInfo, deletePersonalInfo,
     createContactInfo, readContactInfo, updateContactInfo, deleteContactInfo,
-    createPlatformInfo, readPlatformInfo, updatePlatformInfo, deletePlatformInfo,
     createToolInfo, readToolInfo, updateToolInfo, deleteToolInfo,
     createPortfolioInfo, readPortfolioInfo, updatePortfolioInfo, deletePortfolioInfo
 }

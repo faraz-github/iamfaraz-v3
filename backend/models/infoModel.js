@@ -20,10 +20,6 @@ const contactSchema = new mongoose.Schema({
     }]
 });
 
-const platformSchema = new mongoose.Schema({
-    platformName: String
-});
-
 const toolSchema = new mongoose.Schema({
     name: String,
     type: String,
@@ -52,14 +48,12 @@ const portfolioSchema = new mongoose.Schema({
 // Model
 const Personal = mongoose.model("personal", personalSchema);
 const Contact = mongoose.model("contact", contactSchema);
-const Platform = mongoose.model("platform", platformSchema);
 const Tool = mongoose.model("tool", toolSchema);
 const Portfolio = mongoose.model("portfolio", portfolioSchema);
 
 module.exports = {
     Personal,
     Contact,
-    Platform,
     Tool,
     Portfolio
 }
