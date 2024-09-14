@@ -10,7 +10,7 @@ import { useAdmin } from "../contexts/adminContext";
 import AdminDetails from "../components/Dashboard/AdminDetails";
 import PersonalDetails from "../components/Dashboard/PersonalDetails";
 import ContactDetails from "../components/Dashboard/ContactDetails";
-import ToolDetails from "../components/ToolDetails";
+import ToolDetails from "../components/Dashboard/ToolDetails";
 import PortfolioDetails from "../components/PortfolioDetails";
 import ClientDetails from "../components/ClientDetails";
 
