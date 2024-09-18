@@ -11,7 +11,7 @@ import AdminDetails from "../components/Dashboard/AdminDetails";
 import PersonalDetails from "../components/Dashboard/PersonalDetails";
 import ContactDetails from "../components/Dashboard/ContactDetails";
 import ToolDetails from "../components/Dashboard/ToolDetails";
-import PortfolioDetails from "../components/PortfolioDetails";
+import PortfolioDetails from "../components/Dashboard/PortfolioDetails";
 import ClientDetails from "../components/ClientDetails";
 
 function Dashboard() {
