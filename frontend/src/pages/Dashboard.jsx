@@ -12,7 +12,7 @@ import PersonalDetails from "../components/Dashboard/PersonalDetails";
 import ContactDetails from "../components/Dashboard/ContactDetails";
 import ToolDetails from "../components/Dashboard/ToolDetails";
 import PortfolioDetails from "../components/Dashboard/PortfolioDetails";
-import ClientDetails from "../components/ClientDetails";
+import ClientDetails from "../components/Dashboard/ClientDetails";
 
 function Dashboard() {
   const navigate = useNavigate();
