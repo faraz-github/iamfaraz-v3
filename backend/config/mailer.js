@@ -57,4 +57,34 @@ async function sendNewClientContactMail(sendTo, contactData) {
   }
 }
 
-module.exports = { sendMail, sendNewClientContactMail };
+async function sendNewClientMeetingMail(sendTo, meetingData) {
+  try {
+    // Transport Setup
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: EMAIL_ADDRESS,
+        pass: APP_PASSWORD,
+      },
+    });
+
+    // Mail Options
+    const mailOptions = {
+      from: `Faraz Ahmad <${EMAIL_ADDRESS}>`,
+      to: sendTo,
+      subject: "New Client Meeting Request 🤝🎉", // Subject line
+      text: `New Clinet Meeting | Name: ${meetingData?.name}, Email: ${meetingData?.email}, Mode: ${meetingData?.mode}, Slot: ${meetingData?.slot}`, // plain text body
+    };
+
+    const result = await transporter.sendMail(mailOptions);
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+
+module.exports = {
+  sendMail,
+  sendNewClientContactMail,
+  sendNewClientMeetingMail,
+};
