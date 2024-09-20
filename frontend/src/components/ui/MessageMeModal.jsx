@@ -1,4 +1,6 @@
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import {
   Box,
@@ -11,11 +13,13 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useLoading } from "../../contexts/loadingContext";
+
 import StyledLine from "./StyledLine";
 
 const MessageMeModal = ({ open, handleClose }) => {
-  // TODO refine when linking API
-  // TODO add alerts
+  // context
+  const { setOpenLoading } = useLoading();
   // =========================================================================================== USE STATE
   const [formData, setFormData] = useState({
     name: "",
@@ -35,6 +39,35 @@ const MessageMeModal = ({ open, handleClose }) => {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     console.log({ formData });
+    const response = await createContactFormEntryAndMail(formData);
+    if (response) {
+      setTimeout(() => {
+        toast.success("We will get back to you shortly!");
+      }, 2000);
+      handleClose();
+    }
+  };
+
+  // ---API
+  const createContactFormEntryAndMail = async (contactData) => {
+    setOpenLoading(true);
+    try {
+      const response = await axios.post(
+        "/api/communication/new-client-contact",
+        contactData
+      );
+      if (response) {
+        setOpenLoading(false);
+        toast.success("Message Sent Successfully!");
+        return response;
+      }
+    } catch (error) {
+      console.log(error); // Debug Log
+      setOpenLoading(false);
+      if (error?.response?.data?.message) {
+        toast.error(error?.response?.data?.message);
+      }
+    }
   };
 
   return (
