@@ -31,4 +31,30 @@ async function sendMail(sendTo, confirmationURL) {
   }
 }
 
-module.exports = sendMail;
+async function sendNewClientContactMail(sendTo, contactData) {
+  try {
+    // Transport Setup
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: EMAIL_ADDRESS,
+        pass: APP_PASSWORD,
+      },
+    });
+
+    // Mail Options
+    const mailOptions = {
+      from: `Faraz Ahmad <${EMAIL_ADDRESS}>`,
+      to: sendTo,
+      subject: "New Client Contact Request 🎉", // Subject line
+      text: `New Client | Name: ${contactData?.name}, Email: ${contactData?.email}, Message: ${contactData?.message} `, // plain text body
+    };
+
+    const result = await transporter.sendMail(mailOptions);
+    return result;
+  } catch (error) {
+    return error;
+  }
+}
+
+module.exports = { sendMail, sendNewClientContactMail };

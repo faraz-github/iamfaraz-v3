@@ -6,7 +6,7 @@ const bcrypt = require("bcryptjs");
 const Admin = require("../models/adminModel");
 
 // Nodemailer
-const sendMail = require("../config/mailer");
+const { sendMail } = require("../config/mailer");
 
 // Helper method to create a JWT token
 const generateToken = (id) => {

@@ -19,6 +19,7 @@ app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/upload", require("./routes/uploadRoutes"));
 app.use("/api/info", require("./routes/infoRoutes"));
 app.use("/api/client", require("./routes/clientRoutes"));
+app.use("/api/communication", require("./routes/communicationRoutes"));
 
 //----------------------------------------------------------------SERVE FRONTEND
 if (process.env.NODE_ENV === "production") {
