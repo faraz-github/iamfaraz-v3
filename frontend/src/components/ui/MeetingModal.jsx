@@ -1,5 +1,7 @@
 import { useState } from "react";
 import dayjs from "dayjs";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 import {
   Box,
@@ -15,12 +17,15 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useLoading } from "../../contexts/loadingContext";
+
 import StyledLine from "./StyledLine";
 import DateAndTime from "./DateAndTime";
 
 const MeetingModal = ({ open, handleClose }) => {
-  // TODO refine when linking API
-  // TODO add alerts
+  // context
+  const { setOpenLoading } = useLoading();
+
   // =========================================================================================== USE STATE
   const [formData, setFormData] = useState({
     name: "",
@@ -57,6 +62,43 @@ const MeetingModal = ({ open, handleClose }) => {
     // Format date to the desired format: MM/DD/YYYY hh:mm A
     const formattedDate = dateTime.format("MM/DD/YYYY hh:mm A");
     console.log({ formattedDate });
+
+    const meetingData = {
+      name: name,
+      email: email,
+      mode: mode,
+      slot: formattedDate,
+    };
+
+    const response = await createMeetingFormEntryAndMail(meetingData);
+    if (response) {
+      setTimeout(() => {
+        toast.success("We will get back to you shortly!");
+      }, 2000);
+      handleClose();
+    }
+  };
+
+  // ---API
+  const createMeetingFormEntryAndMail = async (meetingData) => {
+    setOpenLoading(true);
+    try {
+      const response = await axios.post(
+        "/api/communication/new-client-meeting",
+        meetingData
+      );
+      if (response) {
+        setOpenLoading(false);
+        toast.success("Meeting Created Successfully!");
+        return response;
+      }
+    } catch (error) {
+      console.log(error); // Debug Log
+      setOpenLoading(false);
+      if (error?.response?.data?.message) {
+        toast.error(error?.response?.data?.message);
+      }
+    }
   };
 
   return (
