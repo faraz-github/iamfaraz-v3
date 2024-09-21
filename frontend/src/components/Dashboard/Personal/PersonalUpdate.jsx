@@ -79,7 +79,7 @@ const PersonalUpdate = ({ token, selectedPersonal, setTabIndex }) => {
         console.log("Please select a profile picture"); // Debug Log
         toast.info("Please select a profile picture");
       } else {
-        const pictureURL = await uploadAdminPicture(selectedImage);
+        const pictureURL = await uploadPersonalPicture(selectedImage);
         // Update Personal Info
         const id = selectedPersonal._id;
         const personalData = {
@@ -99,10 +99,10 @@ const PersonalUpdate = ({ token, selectedPersonal, setTabIndex }) => {
   };
 
   // ---API
-  const uploadAdminPicture = async (base64EncodedImage) => {
+  const uploadPersonalPicture = async (base64EncodedImage) => {
     setOpenLoading(true);
     try {
-      const response = await axios.post("/api/upload/admin/picture", {
+      const response = await axios.post("/api/upload/personal/picture", {
         imageString: base64EncodedImage,
       });
       if (response) {

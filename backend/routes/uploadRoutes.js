@@ -1,13 +1,23 @@
 const express = require("express");
 const router = express.Router();
 
-const { uploadAdminPicture, uploadToolIconPicture, uploadPortfolioPicture, uploadClientPicture } = require("../controllers/uploadController");
+const {
+  uploadAdminPicture,
+  uploadPersonalPicture,
+  uploadToolIconPicture,
+  uploadPortfolioPicture,
+  uploadClientPicture,
+} = require("../controllers/uploadController");
 
 //----------------------------------------------------------------Upload Routes
 // @desc    Upload admin profile picture
 // @route   POST /api/upload/admin/picture
 // @access  Public
 router.post("/admin/picture", uploadAdminPicture);
+// @desc    Upload personal profile picture
+// @route   POST /api/upload/personal/picture
+// @access  Public
+router.post("/personal/picture", uploadPersonalPicture);
 // @desc    Upload tool icon picture
 // @route   POST /api/upload/tool/picture
 // @access  Public

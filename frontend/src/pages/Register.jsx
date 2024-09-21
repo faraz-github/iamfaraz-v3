@@ -85,7 +85,7 @@ function Register() {
         console.log("Please select a profile picture"); // Debug Log
         toast.info("Please select a profile picture");
       } else {
-        const pictureURL = await uploadAdminPicture(selectedImage);
+        const pictureURL = await uploadAdminPicture(selectedImage, name);
         // Register Admin
         const registrationData = {
           name: name,
@@ -103,11 +103,12 @@ function Register() {
   };
 
   // =========================================================================================== API
-  const uploadAdminPicture = async (base64EncodedImage) => {
+  const uploadAdminPicture = async (base64EncodedImage, adminName) => {
     setOpenLoading(true);
     try {
       const response = await axios.post("/api/upload/admin/picture", {
         imageString: base64EncodedImage,
+        adminName: adminName,
       });
       if (response) {
         setOpenLoading(false);
@@ -155,7 +156,7 @@ function Register() {
             variant="outlined"
             sx={{
               p: 5,
-              minWidth: "400px"
+              minWidth: "400px",
             }}
           >
             <Typography variant="h5" fontSize={32} gutterBottom>
