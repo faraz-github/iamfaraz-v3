@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import {
   Box,
   Button,
+  CircularProgress,
   FormLabel,
   Grid,
   Modal,
@@ -13,13 +14,9 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useLoading } from "../../contexts/loadingContext";
-
 import StyledLine from "./StyledLine";
 
 const MessageMeModal = ({ open, handleClose }) => {
-  // context
-  const { setOpenLoading } = useLoading();
   // =========================================================================================== USE STATE
   const [formData, setFormData] = useState({
     name: "",
@@ -27,6 +24,8 @@ const MessageMeModal = ({ open, handleClose }) => {
     message: "",
   });
   const { name, email, message } = formData;
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // =========================================================================================== ON CHANGE
   const onChangeHandler = (event) => {
@@ -50,20 +49,20 @@ const MessageMeModal = ({ open, handleClose }) => {
 
   // ---API
   const createContactFormEntryAndMail = async (contactData) => {
-    setOpenLoading(true);
+    setIsSubmitting(true);
     try {
       const response = await axios.post(
         "/api/communication/new-client-contact",
         contactData
       );
       if (response) {
-        setOpenLoading(false);
+        setIsSubmitting(false);
         toast.success("Message Sent Successfully!");
         return response;
       }
     } catch (error) {
       console.log(error); // Debug Log
-      setOpenLoading(false);
+      setIsSubmitting(false);
       if (error?.response?.data?.message) {
         toast.error(error?.response?.data?.message);
       }
@@ -228,10 +227,14 @@ const MessageMeModal = ({ open, handleClose }) => {
               size="large"
               sx={{ borderRadius: 15, mt: 2 }}
               type="submit"
+              disabled={isSubmitting}
             >
-              <Typography variant="h3" fontSize={32}>
+              <Typography variant="h3" fontSize={32} mr={isSubmitting ? 1 : 0}>
                 Send
               </Typography>
+              {isSubmitting ? (
+                <CircularProgress size="16px" color="inherit" />
+              ) : null}
             </Button>
           </center>
         </form>

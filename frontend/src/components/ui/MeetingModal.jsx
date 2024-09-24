@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import {
   Box,
   Button,
+  CircularProgress,
   FormControlLabel,
   FormLabel,
   Grid,
@@ -17,15 +18,10 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useLoading } from "../../contexts/loadingContext";
-
 import StyledLine from "./StyledLine";
 import DateAndTime from "./DateAndTime";
 
 const MeetingModal = ({ open, handleClose }) => {
-  // context
-  const { setOpenLoading } = useLoading();
-
   // =========================================================================================== USE STATE
   const [formData, setFormData] = useState({
     name: "",
@@ -39,6 +35,8 @@ const MeetingModal = ({ open, handleClose }) => {
   });
 
   const { name, email, mode } = formData;
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // =========================================================================================== ON CHANGE
   const onChangeHandler = (event) => {
@@ -81,20 +79,20 @@ const MeetingModal = ({ open, handleClose }) => {
 
   // ---API
   const createMeetingFormEntryAndMail = async (meetingData) => {
-    setOpenLoading(true);
+    setIsSubmitting(true);
     try {
       const response = await axios.post(
         "/api/communication/new-client-meeting",
         meetingData
       );
       if (response) {
-        setOpenLoading(false);
+        setIsSubmitting(false);
         toast.success("Meeting Created Successfully!");
         return response;
       }
     } catch (error) {
       console.log(error); // Debug Log
-      setOpenLoading(false);
+      setIsSubmitting(false);
       if (error?.response?.data?.message) {
         toast.error(error?.response?.data?.message);
       }
@@ -334,10 +332,14 @@ const MeetingModal = ({ open, handleClose }) => {
               size="large"
               sx={{ borderRadius: 15, mt: 2 }}
               type="submit"
+              disabled={isSubmitting}
             >
-              <Typography variant="h3" fontSize={32}>
-                Send
+              <Typography variant="h3" fontSize={32} mr={isSubmitting ? 1 : 0}>
+                Book Meeting
               </Typography>
+              {isSubmitting ? (
+                <CircularProgress size="16px" color="inherit" />
+              ) : null}
             </Button>
           </center>
         </form>
