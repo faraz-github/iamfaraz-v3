@@ -6,6 +6,8 @@ import { Box, Typography } from "@mui/material";
 import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
+import styles from "./DisplaySwitch.module.css";
+
 const DisplaySwitch = ({ skillType, setSkillType }) => {
   const [triggerDown, setTriggerDown] = useState(false);
   const [triggerUp, setTriggerUp] = useState(false);
@@ -66,9 +68,9 @@ const DisplaySwitch = ({ skillType, setSkillType }) => {
           position={"absolute"}
           className={
             triggerUp
-              ? "transitionElementUp"
+              ? styles.transitionElementUp
               : triggerDown
-              ? "transitionElementDown"
+              ? styles.transitionElementDown
               : ""
           }
         >

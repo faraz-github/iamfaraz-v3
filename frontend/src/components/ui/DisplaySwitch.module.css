@@ -1,0 +1,53 @@
+.transitionElementDown {
+  animation: slideDownFadeInOut 500ms ease-out; /* Adjust timing as needed */
+}
+
+.transitionElementUp {
+  animation: slideUpFadeInOut 500ms ease-out; /* Adjust timing as needed */
+}
+
+@keyframes slideDownFadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+    display: none;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(30px);
+    display: block;
+  }
+  75% {
+    opacity: 0;
+    transform: translateY(30px);
+    display: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+    display: none;
+  }
+}
+
+@keyframes slideUpFadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(0);
+    display: none;
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-30px);
+    display: block;
+  }
+  75% {
+    opacity: 0;
+    transform: translateY(-30px);
+    display: none;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0);
+    display: none;
+  }
+}
