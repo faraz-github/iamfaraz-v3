@@ -11,10 +11,6 @@ import { useAdmin } from "../contexts/adminContext";
 import HeroSection from "../components/HeroSection";
 import ProjectSection from "../components/ProjectSection";
 import CapabilitySection from "../components/CapabilitySection";
-import Contact from "../components/Contact";
-import Tool from "../components/Tool";
-import Portfolio from "../components/Portfolio";
-import Footer from "../components/Footer";
 import SkillSection from "../components/SkillSection";
 import ContactSection from "../components/ContactSection";
 import FooterSection from "../components/FooterSection";
@@ -48,7 +44,12 @@ function Home() {
       <FooterSection />
       {backToTop && (
         <Fab
-          onClick={() => window.scrollTo(0, 0)}
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          }
           sx={{
             position: "fixed",
             bottom: 16,
