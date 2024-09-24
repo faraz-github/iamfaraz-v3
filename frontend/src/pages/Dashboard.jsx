@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { Container, ToggleButton, ToggleButtonGroup } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +13,8 @@ import ContactDetails from "../components/Dashboard/ContactDetails";
 import ToolDetails from "../components/Dashboard/ToolDetails";
 import PortfolioDetails from "../components/Dashboard/PortfolioDetails";
 import ClientDetails from "../components/Dashboard/ClientDetails";
+import SectionBox from "../components/ui/SectionBox";
+import LayoutContainer from "../components/ui/LayoutContainer";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -66,8 +68,8 @@ function Dashboard() {
 
   // =========================================================================================== RENDER
   return (
-    <Container className="viewportContainer">
-      <center>
+    <SectionBox id="dashboard">
+      <LayoutContainer>
         <ToggleButtonGroup
           value={manager}
           exclusive
@@ -84,9 +86,10 @@ function Dashboard() {
           <ToggleButton value="portfolio">Portfolio</ToggleButton>
           <ToggleButton value="client">Client</ToggleButton>
         </ToggleButtonGroup>
-      </center>
-      {renderManagerCard()}
-    </Container>
+
+        {renderManagerCard()}
+      </LayoutContainer>
+    </SectionBox>
   );
 }
 
