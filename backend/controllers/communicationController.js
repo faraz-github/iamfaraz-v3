@@ -30,8 +30,6 @@ const createContactFormEntryAndMail = asyncHandler(async (req, res) => {
 
   if (contactForm) {
     res.status(201);
-    res.send(contactForm);
-
     const info = await sendNewClientContactMail(MY_EMAIL, contactData);
 
     if (info) {
@@ -70,8 +68,6 @@ const createMeetingFormEntryAndMail = asyncHandler(async (req, res) => {
 
   if (meetingForm) {
     res.status(201);
-    res.send(meetingForm);
-
     const info = await sendNewClientMeetingMail(MY_EMAIL, meetingData);
 
     if (info) {
