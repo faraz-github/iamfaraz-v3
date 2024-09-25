@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { HashLink } from "react-router-hash-link";
 
 import { Box, Button, Grid, Stack, Typography } from "@mui/material";
@@ -5,15 +7,41 @@ import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 
-import { lightTheme } from "../MUI/theme";
-
 import SectionBox from "./ui/SectionBox";
 import LayoutContainer from "./ui/LayoutContainer";
 import ClientHighlightCard from "./ui/ClientHighlightCard";
 import SectionHeading from "./ui/SectionHeading";
 
 const HeroSection = () => {
-  const secondaryColor = lightTheme.palette.secondary.main;
+  // state
+  const [clients, setClients] = useState([]);
+
+  // helpers
+  const trimProjectTitle = (projectTitle) => {
+    const index = projectTitle.indexOf("(");
+    const result =
+      index !== -1 ? projectTitle.substring(0, index).trim() : projectTitle;
+    return result;
+  };
+
+  // ---API
+  useEffect(() => {
+    const readClientInfo = async () => {
+      try {
+        const response = await axios.get("/api/client/all");
+        if (response) {
+          setClients(response.data);
+          return response;
+        }
+      } catch (error) {
+        console.log(error); // Debug Log
+        if (error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message);
+        }
+      }
+    };
+    readClientInfo();
+  }, []);
 
   return (
     <SectionBox id="hero">
@@ -154,63 +182,27 @@ const HeroSection = () => {
           </Grid>
         </Grid>
         <SectionHeading heading="Highlights" />
-        <Grid container>
-          <Grid item xs={3}>
-            <ClientHighlightCard
-              title={"Onito HIS"}
-              description={
-                "Onito HIS is a healthcare information system used in hospitals. The job tenure involved developing new healthcare features and maintaining existing ones."
-              }
-              logo={
-                <HourglassEmptyIcon
-                  htmlColor={secondaryColor}
-                  sx={{ fontSize: "24px" }}
-                />
-              }
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <ClientHighlightCard
-              title={"Vizard"}
-              description={
-                "Vizard is a customized media marketing platform where I first worked with Next.js during my internship, developing a serverless app using Firebase for the backend and Next.js for the client."
-              }
-              logo={
-                <HourglassEmptyIcon
-                  htmlColor={secondaryColor}
-                  sx={{ fontSize: "24px" }}
-                />
-              }
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <ClientHighlightCard
-              title={"LucknowCars"}
-              description={
-                "LucknowCars is a local business in my city specializing in buying and selling used cars. My short-term job involved creating their website."
-              }
-              logo={
-                <HourglassEmptyIcon
-                  htmlColor={secondaryColor}
-                  sx={{ fontSize: "24px" }}
-                />
-              }
-            />
-          </Grid>
-          <Grid item xs={3}>
-            <ClientHighlightCard
-              title={"ScriptedThreads"}
-              description={
-                "ScriptedThreads is an ongoing project focused on becoming your go-to platform for learning web development, supported by an engaging Instagram community."
-              }
-              logo={
-                <HourglassEmptyIcon
-                  htmlColor={secondaryColor}
-                  sx={{ fontSize: "24px" }}
-                />
-              }
-            />
-          </Grid>
+        <Grid container spacing={2}>
+          {clients.length
+            ? clients.map((client, index) => {
+                return (
+                  <Grid item xs={3} key={index}>
+                    <ClientHighlightCard
+                      title={trimProjectTitle(client.project.name)}
+                      description={client.project.description}
+                      logo={
+                        <HourglassEmptyIcon
+                          sx={{
+                            fontSize: "24px",
+                            color: (theme) => theme.palette.secondary.main,
+                          }}
+                        />
+                      }
+                    />
+                  </Grid>
+                );
+              })
+            : null}
         </Grid>
       </LayoutContainer>
     </SectionBox>
