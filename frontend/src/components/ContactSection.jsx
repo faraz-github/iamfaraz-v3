@@ -1,17 +1,60 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
+
 import { Box, Button, Fab, Grid, Stack, Typography } from "@mui/material";
-import LayoutContainer from "./ui/LayoutContainer";
-import SectionBox from "./ui/SectionBox";
-import StyledLine from "./ui/StyledLine";
 import EventIcon from "@mui/icons-material/Event";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import PhoneAndroidRoundedIcon from "@mui/icons-material/PhoneAndroidRounded";
-import { useState } from "react";
+
+import LayoutContainer from "./ui/LayoutContainer";
+import SectionBox from "./ui/SectionBox";
+import StyledLine from "./ui/StyledLine";
 import MessageMeModal from "./ui/MessageMeModal";
 import MeetingModal from "./ui/MeetingModal";
+
+import { statusColor, statusText } from "./Navbar/StatusIndicator";
 
 const ContactSection = () => {
   const [openMessageModal, setOpenMessageModal] = useState(false);
   const [openMettingModal, setOpenMeetingModal] = useState(false);
+
+  // state
+  const [status, setStatus] = useState(null);
+  const [contact, setContact] = useState(null);
+
+  // ---API
+  useEffect(() => {
+    const readPersonalInfo = async () => {
+      try {
+        const response = await axios.get("/api/info/personal");
+        if (response) {
+          setStatus(response.data[0]?.status);
+          return response;
+        }
+      } catch (error) {
+        console.log(error); // Debug Log
+        if (error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message);
+        }
+      }
+    };
+    const readContactInfo = async () => {
+      try {
+        const response = await axios.get("/api/info/contact");
+        if (response) {
+          setContact(response.data[0]);
+          return response;
+        }
+      } catch (error) {
+        console.log(error); // Debug Log
+        if (error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message);
+        }
+      }
+    };
+    readPersonalInfo();
+    readContactInfo();
+  }, []);
 
   return (
     <SectionBox id="contact" halfScreenHeight>
@@ -74,13 +117,12 @@ const ContactSection = () => {
               alignItems={"center"}
             >
               <Stack alignItems={"center"} spacing={4}>
-                {/* // TODO integrate api for availability check */}
                 <Stack direction={"row"} spacing={2}>
                   <Box
                     width={30}
                     height={30}
                     border="1px solid"
-                    borderColor="success.light"
+                    borderColor={statusColor(status)}
                     borderRadius={(theme) => theme.shape.borderRadius}
                     sx={{ transform: "rotate(45deg)" }}
                     display={"flex"}
@@ -90,16 +132,16 @@ const ContactSection = () => {
                     <Box
                       width={20}
                       height={20}
-                      bgcolor={"success.light"}
+                      bgcolor={statusColor(status)}
                       borderRadius={(theme) => theme.shape.borderRadius}
                     ></Box>
                   </Box>
                   <Typography
                     variant="h6"
                     fontSize={24}
-                    color={"success.light"}
+                    color={statusColor(status)}
                   >
-                    Available
+                    {statusText(status)}
                   </Typography>
                 </Stack>
                 <Stack direction={"row"} spacing={2} alignItems={"center"}>
@@ -112,7 +154,7 @@ const ContactSection = () => {
                     fontSize={20}
                     color={(theme) => theme.palette.background.paper}
                   >
-                    info@abcdef.com
+                    {contact?.email}
                   </Typography>
                 </Stack>
                 <Stack direction={"row"} spacing={2} alignItems={"center"}>
@@ -125,7 +167,7 @@ const ContactSection = () => {
                     fontSize={24}
                     color={(theme) => theme.palette.background.paper}
                   >
-                    786-6732-731
+                    {contact?.phone}
                   </Typography>
                 </Stack>
               </Stack>

@@ -3,9 +3,39 @@ import axios from "axios";
 
 import { Box, Stack, Typography } from "@mui/material";
 
+export const statusColor = (status) => {
+  switch (status) {
+    case "available":
+      return "success.light";
+    case "busyQuick":
+      return "secondary.light";
+    case "busyLong":
+      return "primary.light";
+    case "break":
+      return "error.dark";
+    default:
+      return "background.default";
+  }
+};
+
+export const statusText = (status) => {
+  switch (status) {
+    case "available":
+      return "Available";
+    case "busyQuick":
+      return "Little Busy";
+    case "busyLong":
+      return "Very Busy";
+    case "break":
+      return "Break Time";
+    default:
+      return "background.default";
+  }
+};
+
 const StatusIndicator = () => {
   // state
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(null);
 
   // ---API
   useEffect(() => {
@@ -25,36 +55,6 @@ const StatusIndicator = () => {
     };
     readPersonalInfo();
   }, []);
-
-  const statusColor = (status) => {
-    switch (status) {
-      case "available":
-        return "success.light";
-      case "busyQuick":
-        return "secondary.light";
-      case "busyLong":
-        return "primary.light";
-      case "break":
-        return "error.dark";
-      default:
-        return "background.default";
-    }
-  };
-
-  const statusText = (status) => {
-    switch (status) {
-      case "available":
-        return "Available";
-      case "busyQuick":
-        return "Little Busy";
-      case "busyLong":
-        return "Very Busy";
-      case "break":
-        return "Break Time";
-      default:
-        return "background.default";
-    }
-  };
 
   return (
     <Box height={"100%"} display={"flex"} alignItems={"center"}>
