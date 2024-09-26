@@ -1,14 +1,62 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
 
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import SectionBox from "./ui/SectionBox";
 import LayoutContainer from "./ui/LayoutContainer";
-//  TODO make links clickable
+
 const FooterSection = () => {
+  // state
+  const [socials, setSocials] = useState([]);
+
+  // helpers
+  const iconMapping = {
+    WhatsApp: (
+      <WhatsAppIcon
+        fontSize="medium"
+        color="primary.main"
+        sx={{
+          ":hover": {
+            color: "secondary.main",
+          },
+        }}
+      />
+    ),
+    GitHub: (
+      <GitHubIcon
+        fontSize="medium"
+        color="primary.main"
+        sx={{
+          ":hover": {
+            color: "secondary.main",
+          },
+        }}
+      />
+    ),
+  };
+
+  // ---API
+  useEffect(() => {
+    const readContactInfo = async () => {
+      try {
+        const response = await axios.get("/api/info/contact");
+        if (response) {
+          setSocials(response.data[0].social);
+          return response;
+        }
+      } catch (error) {
+        console.log(error); // Debug Log
+        if (error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message);
+        }
+      }
+    };
+    readContactInfo();
+  }, []);
+
   return (
     <SectionBox id="footer" halfScreenHeight>
       <LayoutContainer>
@@ -82,10 +130,21 @@ const FooterSection = () => {
               justifyContent={"flex-end"}
             >
               <Stack direction={"row"} spacing={2}>
-                <GitHubIcon fontSize="medium" color="primary.main" />
-                <TwitterIcon fontSize="medium" color="primary.main" />
-                <FacebookIcon fontSize="medium" color="primary.main" />
-                <InstagramIcon fontSize="medium" color="primary.main" />
+                {socials.length
+                  ? socials.map((social, index) => {
+                      return (
+                        <a
+                          key={index}
+                          href={`${social.baseURL}${social.username}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={social.platformName}
+                        >
+                          {iconMapping[social.platformName]}
+                        </a>
+                      );
+                    })
+                  : null}
               </Stack>
             </Grid>
           </Grid>
@@ -112,3 +171,8 @@ const FooterSection = () => {
 };
 
 export default FooterSection;
+
+// TODO features to add
+// 1. connect terms and condition and privacy policy modal
+// 2. make links clickable aka hyperlinks
+// 3. render dynamic year for copyright
