@@ -1,107 +1,75 @@
+import { useState, useEffect } from "react";
+import axios from "axios";
+
 import { Grid } from "@mui/material";
+
 import LayoutContainer from "./ui/LayoutContainer";
 import SectionBox from "./ui/SectionBox";
 import SectionHeading from "./ui/SectionHeading";
 import ProjectCard from "./ui/ProjectCard";
 
-const images = [
-  "https://picsum.photos/600/400",
-  "https://picsum.photos/600/400?grayscale",
-  "https://picsum.photos/600/400",
-  "https://picsum.photos/600/400?grayscale",
-];
-
-const tools = [
-  {
-    name: "React",
-    iconUrl: "/assets/reactIconWhite.svg",
-  },
-  {
-    name: "Material UI",
-    iconUrl: "/assets/reactIcon.svg",
-  },
-  {
-    name: "TypeScript",
-    iconUrl: "/assets/reactIconWhite.svg",
-  },
-  {
-    name: "Firebase",
-    iconUrl: "/assets/reactIcon.svg",
-  },
-  {
-    name: "AWS",
-    iconUrl: "/assets/reactIconWhite.svg",
-  },
-];
-
 const ProjectSection = () => {
+  // state
+  const [projects, setProjects] = useState([]);
+
+  // helpers
+  const imagesArray = (project) => {
+    let images = [];
+
+    if (project.picture) {
+      images.push(project.picture);
+    }
+    if (project.firstScreen) {
+      images.push(project.firstScreen);
+    }
+    if (project.secondScreen) {
+      images.push(project.secondScreen);
+    }
+    if (project.lastScreen) {
+      images.push(project.lastScreen);
+    }
+
+    return images;
+  };
+
+  // ---API
+  useEffect(() => {
+    const readPortfolioInfo = async () => {
+      try {
+        const response = await axios.get("/api/info/portfolio");
+        if (response) {
+          setProjects(response.data);
+          return response;
+        }
+      } catch (error) {
+        console.log(error); // Debug Log
+        if (error?.response?.data?.message) {
+          toast.error(error?.response?.data?.message);
+        }
+      }
+    };
+    readPortfolioInfo();
+  }, []);
+
   return (
     <SectionBox id="projects">
       <LayoutContainer>
         <SectionHeading heading="Projects" />
         <Grid container spacing={1}>
-          <Grid item xs={4}>
-            <ProjectCard
-              title={"Onito HIS"}
-              description={
-                "Onito Hospital Information System is one of the most innovative and user-friendly software for managing healthcare operations."
-              }
-              tools={tools}
-              images={images}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <ProjectCard
-              title={"Onito HIS"}
-              description={
-                "Onito Hospital Information System is one of the most innovative and user-friendly software for managing healthcare operations."
-              }
-              tools={tools}
-              images={images.slice(0, 1)}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            {" "}
-            <ProjectCard
-              title={"Onito HIS"}
-              description={
-                "Onito Hospital Information System is one of the most innovative and user-friendly software for managing healthcare operations."
-              }
-              tools={tools}
-              images={images}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <ProjectCard
-              title={"Onito HIS"}
-              description={
-                "Onito Hospital Information System is one of the most innovative and user-friendly software for managing healthcare operations."
-              }
-              tools={tools}
-              images={images}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <ProjectCard
-              title={"Onito HIS"}
-              description={
-                "Onito Hospital Information System is one of the most innovative and user-friendly software for managing healthcare operations."
-              }
-              tools={tools}
-              images={images.slice(0, 1)}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            {" "}
-            <ProjectCard
-              title={"Onito HIS"}
-              description={
-                "Onito Hospital Information System is one of the most innovative and user-friendly software for managing healthcare operations."
-              }
-              tools={tools}
-              images={images}
-            />
-          </Grid>
+          {projects.length
+            ? projects.map((project, index) => {
+                return (
+                  <Grid item xs={4} key={index}>
+                    <ProjectCard
+                      title={project.name}
+                      description={project.description}
+                      tools={project.stack}
+                      images={imagesArray(project)}
+                    />
+                  </Grid>
+                );
+              })
+            : null}
         </Grid>
       </LayoutContainer>
     </SectionBox>

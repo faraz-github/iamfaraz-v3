@@ -2,13 +2,10 @@ import { Chip, Stack } from "@mui/material";
 
 const ToolChips = ({ tools }) => {
   return (
-    <Stack
-      direction={"row"}
-      flexWrap={"wrap"}
-    >
+    <Stack direction={"row"} flexWrap={"wrap"}>
       {tools.map((tool, index) => (
         <Chip
-        size="small"
+          size="small"
           key={index}
           color="secondary"
           sx={{
@@ -19,14 +16,7 @@ const ToolChips = ({ tools }) => {
             mr: 1,
             mb: 1,
           }}
-          icon={
-            <img
-              src={tool.iconUrl}
-              alt={tool.name}
-              style={{ width: 16, height: 16 }}
-            />
-          }
-          label={tool.name}
+          label={tool}
         />
       ))}
     </Stack>
