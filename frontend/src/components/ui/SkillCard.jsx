@@ -1,4 +1,4 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Tooltip, Typography } from "@mui/material";
 
 const SkillCard = ({ logoUrl, name, description }) => {
   return (
@@ -19,7 +19,12 @@ const SkillCard = ({ logoUrl, name, description }) => {
         <img
           src={logoUrl}
           alt={name}
-          style={{ width: 30, height: "auto", transform: "rotate(-45deg)" }}
+          style={{
+            width: 30,
+            height: "auto",
+            transform: "rotate(-45deg)",
+            filter: "drop-shadow(0 0 1px #fff)",
+          }}
         />
       </Box>
       <Box
@@ -43,14 +48,17 @@ const SkillCard = ({ logoUrl, name, description }) => {
           >
             {name}
           </Typography>
-          <Typography
-            variant="body2"
-            fontSize={16}
-            color="primary.main"
-            textAlign={"center"}
-          >
-            {description}
-          </Typography>
+          <Tooltip title={description.length >= 65 ? description : ""}>
+            <Typography
+              variant="body2"
+              fontSize={16}
+              color="primary.main"
+              textAlign={"center"}
+            >
+              {description.slice(0, 65)}
+              {description.length >= 65 ? "..." : ""}
+            </Typography>
+          </Tooltip>
         </Stack>
       </Box>
     </Stack>

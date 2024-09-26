@@ -1,7 +1,5 @@
 import { useState } from "react";
 
-import { useRef } from "react";
-
 import { Box, Typography } from "@mui/material";
 import KeyboardArrowUpRoundedIcon from "@mui/icons-material/KeyboardArrowUpRounded";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
@@ -13,17 +11,15 @@ const DisplaySwitch = ({ skillType, setSkillType }) => {
   const [triggerUp, setTriggerUp] = useState(false);
   const [centerAppear, setCenterAppear] = useState(false);
 
-  const movingTypographyRef = useRef(null);
-
   const handleChange = (event) => {
     setCenterAppear(true);
 
     const buttonId = event.currentTarget.id;
-    if (buttonId === "up" && skillType !== "technology") {
+    if (buttonId === "up" && skillType !== "development") {
       setTriggerUp(true);
       setTriggerDown(false);
       setTimeout(() => {
-        setSkillType("technology");
+        setSkillType("development");
       }, 250);
     } else if (buttonId === "down" && skillType !== "design") {
       setTriggerDown(true);
@@ -60,7 +56,6 @@ const DisplaySwitch = ({ skillType, setSkillType }) => {
         }}
       >
         <Typography
-          ref={movingTypographyRef}
           variant="body2"
           fontSize={22}
           color={"primary.main"}
@@ -101,10 +96,10 @@ const DisplaySwitch = ({ skillType, setSkillType }) => {
             justifyContent: "center",
             alignItems: "center",
             boxShadow: (theme) =>
-              `inset 0 0 ${skillType !== "technology" ? "10px" : "30px"} ${
+              `inset 0 0 ${skillType !== "development" ? "10px" : "30px"} ${
                 theme.palette.custom.retroInnerShadowColor
               }`,
-            cursor: skillType !== "technology" ? "pointer" : "default",
+            cursor: skillType !== "development" ? "pointer" : "default",
           }}
           onClick={handleChange}
         >
