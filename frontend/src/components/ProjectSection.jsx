@@ -55,11 +55,11 @@ const ProjectSection = () => {
     <SectionBox id="projects">
       <LayoutContainer>
         <SectionHeading heading="Projects" />
-        <Grid container spacing={1}>
+        <Grid container spacing={2} p={1}>
           {projects.length
             ? projects.map((project, index) => {
                 return (
-                  <Grid item xs={4} key={index}>
+                  <Grid item lg={4} md={6} sm={6} xs={12} key={index}>
                     <ProjectCard
                       title={project.name}
                       description={project.description}
