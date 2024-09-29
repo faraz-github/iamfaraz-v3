@@ -23,6 +23,7 @@ export const lightTheme = createTheme({
         custom:{
             sectionHeadingColor: "#70838A",
             retroInnerShadowColor: 'rgba(37, 37, 37, 0.5)', 
+            heroCoverImageBgColor: 'rgba(255, 255, 255, 0.8)', 
         }
     },
     typography: {
@@ -79,6 +80,7 @@ export const darkTheme = createTheme({
         custom:{
             sectionHeadingColor: "#70838A",
             retroInnerShadowColor: 'rgba(255, 255, 255, 0.5)', 
+            heroCoverImageBgColor: 'rgba(37, 37, 37, 0.8)', 
         }
     },
     typography: {

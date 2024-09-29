@@ -8,8 +8,16 @@ const ClientHighlightCard = ({ title, description, logo }) => {
   return (
     <Box
       sx={{
-        width: 250,
-        height: 250,
+        width: {
+          md: 250,
+          sm: 200,
+          xs: 175,
+        },
+        height: {
+          md: 250,
+          sm: 200,
+          xs: 175,
+        },
         backgroundImage:
           theme === "light"
             ? "url(/assets/highlightCardLight.svg)"
@@ -21,10 +29,18 @@ const ClientHighlightCard = ({ title, description, logo }) => {
       }}
     >
       <Box
-        width={50}
-        height={50}
         borderRadius={"50%"}
         sx={{
+          width: {
+            md: 50,
+            sm: 40,
+            xs: 30,
+          },
+          height: {
+            md: 50,
+            sm: 40,
+            xs: 30,
+          },
           background: (theme) => theme.palette.background.paper,
           position: "absolute",
           right: 0,
@@ -35,10 +51,25 @@ const ClientHighlightCard = ({ title, description, logo }) => {
       >
         {logo}
       </Box>
-      <Box py={2} pl={4} pr={4}>
+      <Box
+        py={2}
+        sx={{
+          px: {
+            md: 4,
+            sm: 3,
+            xs: 2,
+          },
+        }}
+      >
         <Typography
           variant="h5"
-          fontSize={24}
+          sx={{
+            fontSize: {
+              md: 24,
+              sm: 20,
+              xs: 18,
+            },
+          }}
           color={"primary.main"}
           gutterBottom
         >
@@ -46,9 +77,19 @@ const ClientHighlightCard = ({ title, description, logo }) => {
         </Typography>
         <Typography
           variant="body2"
-          fontSize={16}
+          sx={{
+            fontSize: {
+              md: 16,
+              sm: 14,
+              xs: 12,
+            },
+            mt: {
+              md: 3,
+              sm: 2,
+              xs: 2,
+            },
+          }}
           color={"primary.main"}
-          mt={3}
           textAlign={"center"}
         >
           {description}

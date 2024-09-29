@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { HashLink } from "react-router-hash-link";
 
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Typography, useTheme } from "@mui/material";
 import HourglassEmptyIcon from "@mui/icons-material/HourglassEmpty";
 import WorkOutlineIcon from "@mui/icons-material/WorkOutline";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
@@ -12,7 +12,12 @@ import LayoutContainer from "./ui/LayoutContainer";
 import ClientHighlightCard from "./ui/ClientHighlightCard";
 import SectionHeading from "./ui/SectionHeading";
 
+import useCurrentBreakpoint from "../hooks/useCurrentBreakpoint";
+
 const HeroSection = () => {
+  const theme = useTheme(); // Access the theme
+  const currentBreakpoint = useCurrentBreakpoint();
+
   // state
   const [clients, setClients] = useState([]);
 
@@ -46,9 +51,42 @@ const HeroSection = () => {
   return (
     <SectionBox id="hero">
       <LayoutContainer>
-        <Grid container mt={5} alignItems={"center"}>
-          <Grid item xs={3}>
-            <Stack spacing={1}>
+        <Grid
+          container
+          sx={{
+            marginTop: {
+              lg: 5,
+              xs: 3,
+            },
+          }}
+          alignItems={"center"}
+        >
+          <Grid
+            item
+            md={3}
+            sm={6}
+            xs={12}
+            sx={{
+              backgroundImage:
+                currentBreakpoint === "xs"
+                  ? "url(/assets/heroCenterLight.png)"
+                  : "none",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <Stack
+              spacing={1}
+              width={"fit-content"}
+              p={currentBreakpoint === "xs" ? 2 : 0}
+              sx={{
+                backgroundColor: {
+                  xs: theme.palette.custom.heroCoverImageBgColor,
+                  sm: theme.palette.background.default,
+                },
+              }}
+            >
               <Box>
                 <Box
                   display={"inline-block"}
@@ -59,13 +97,29 @@ const HeroSection = () => {
                   borderRadius={(theme) => theme.shape.borderRadius}
                   borderColor={(theme) => theme.palette.secondary.main}
                 >
-                  <Typography variant="h1" fontSize={40} color={"primary.main"}>
+                  <Typography
+                    variant="h1"
+                    sx={{
+                      fontSize: {
+                        lg: 40,
+                        md: 30,
+                        xs: 35,
+                      },
+                    }}
+                    color={"primary.main"}
+                  >
                     Full Stack
                   </Typography>
                 </Box>
                 <Typography
                   variant="h1"
-                  fontSize={40}
+                  sx={{
+                    fontSize: {
+                      lg: 40,
+                      md: 30,
+                      xs: 35,
+                    },
+                  }}
                   color={"primary.main"}
                   display={"inline-block"}
                 >
@@ -74,7 +128,12 @@ const HeroSection = () => {
               </Box>
               <Typography
                 variant="h1"
-                fontSize={60}
+                sx={{
+                  fontSize: {
+                    lg: 60,
+                    xs: 50,
+                  },
+                }}
                 color={"primary.main"}
                 textAlign={"center"}
                 width={"60%"}
@@ -84,7 +143,13 @@ const HeroSection = () => {
               <Box>
                 <Typography
                   variant="h1"
-                  fontSize={40}
+                  sx={{
+                    fontSize: {
+                      lg: 40,
+                      md: 30,
+                      xs: 35,
+                    },
+                  }}
                   color={"primary.main"}
                   display={"inline-block"}
                 >
@@ -99,21 +164,51 @@ const HeroSection = () => {
                   borderRadius={(theme) => theme.shape.borderRadius}
                   borderColor={(theme) => theme.palette.secondary.main}
                 >
-                  <Typography variant="h1" color={"primary.main"} fontSize={40}>
+                  <Typography
+                    variant="h1"
+                    color={"primary.main"}
+                    sx={{
+                      fontSize: {
+                        lg: 40,
+                        md: 30,
+                        xs: 35,
+                      },
+                    }}
+                  >
                     Expert
                   </Typography>
                 </Box>
               </Box>
             </Stack>
           </Grid>
-          <Grid item xs={6}>
+          <Grid
+            item
+            md={6}
+            sm={6}
+            sx={{
+              display: {
+                sm: "flex",
+                xs: "none",
+              },
+            }}
+          >
             <img
               src="/assets/heroCenterLight.png"
               alt="hero-light-mode"
-              style={{ width: 600, height: "auto" }}
+              style={{
+                width:
+                  currentBreakpoint === "xs"
+                    ? 400
+                    : currentBreakpoint === "sm"
+                    ? 300
+                    : currentBreakpoint === "md"
+                    ? 400
+                    : 600,
+                height: "auto",
+              }}
             />
           </Grid>
-          <Grid item xs={3} px={1}>
+          <Grid item md={3} xs={12} p={2}>
             <Box
               p={2}
               border={"1px dashed"}
@@ -122,7 +217,12 @@ const HeroSection = () => {
             >
               <Typography
                 variant="body2"
-                fontSize={24}
+                sx={{
+                  fontSize: {
+                    lg: 24,
+                    xs: 18,
+                  },
+                }}
                 color={"primary.main"}
                 textAlign={"center"}
                 lineHeight={1.2}
@@ -145,14 +245,37 @@ const HeroSection = () => {
               <Button
                 variant="contained"
                 sx={{
-                  px: 4,
+                  px: currentBreakpoint === "xs" ? 2 : 4,
                   borderRadius: (theme) => theme.shape.borderRadius,
                 }}
                 endIcon={
-                  <WorkOutlineIcon sx={{ width: "30px", height: "30px" }} />
+                  <WorkOutlineIcon
+                    sx={{
+                      width: {
+                        lg: 30,
+                        sm: 25,
+                        xs: 20,
+                      },
+                      height: {
+                        lg: 30,
+                        sm: 25,
+                        xs: 20,
+                      },
+                    }}
+                  />
                 }
               >
-                <Typography variant="h6" fontSize={32} mr={1}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: {
+                      lg: 32,
+                      sm: 24,
+                      xs: 20,
+                    },
+                  }}
+                  mr={1}
+                >
                   View my work
                 </Typography>
               </Button>
@@ -167,14 +290,37 @@ const HeroSection = () => {
               <Button
                 variant="contained"
                 sx={{
-                  px: 4,
+                  px: currentBreakpoint === "xs" ? 2 : 4,
                   borderRadius: (theme) => theme.shape.borderRadius,
                 }}
                 endIcon={
-                  <AlternateEmailIcon sx={{ width: "30px", height: "30px" }} />
+                  <AlternateEmailIcon
+                    sx={{
+                      width: {
+                        lg: 30,
+                        sm: 25,
+                        xs: 20,
+                      },
+                      height: {
+                        lg: 30,
+                        sm: 25,
+                        xs: 20,
+                      },
+                    }}
+                  />
                 }
               >
-                <Typography variant="h6" fontSize={32} mr={1}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontSize: {
+                      lg: 32,
+                      sm: 24,
+                      xs: 20,
+                    },
+                  }}
+                  mr={1}
+                >
                   Contact me
                 </Typography>
               </Button>
@@ -186,14 +332,27 @@ const HeroSection = () => {
           {clients.length
             ? clients.map((client, index) => {
                 return (
-                  <Grid item xs={3} key={index}>
+                  <Grid
+                    item
+                    lg={3}
+                    md={4}
+                    sm={6}
+                    xs={6}
+                    key={index}
+                    display={"flex"}
+                    justifyContent={"center"}
+                  >
                     <ClientHighlightCard
                       title={trimProjectTitle(client.project.name)}
                       description={client.project.description}
                       logo={
                         <HourglassEmptyIcon
                           sx={{
-                            fontSize: "24px",
+                            fontSize: {
+                              md: "24px",
+                              sm: "20px",
+                              xs: "16px",
+                            },
                             color: (theme) => theme.palette.secondary.main,
                           }}
                         />
