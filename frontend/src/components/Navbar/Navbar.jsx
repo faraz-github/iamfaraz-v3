@@ -16,11 +16,16 @@ import FarazAhmad from "./FarazAhmad";
 import StatusIndicator from "./StatusIndicator";
 import NavigationHashLink from "./NavigationHashLink";
 import ThemeSwitch from "./ThemeSwitch";
+import NavbarMenu from "./NavbarMenu";
 
 import { useAdmin } from "../../contexts/adminContext";
+import useDynamicMargin from "../../hooks/useDynamicMargin";
+import useCurrentBreakpoint from "../../hooks/useCurrentBreakpoint";
 
 const Navbar = () => {
   const { token, setToken } = useAdmin();
+  const margin = useDynamicMargin();
+  const currentBreakpoint = useCurrentBreakpoint();
 
   const logoutAdmin = () => {
     localStorage.removeItem("admin");
@@ -31,32 +36,41 @@ const Navbar = () => {
     <Box marginY={2}>
       <Stack direction={"row"}>
         <Box
-          className={"horizontalMarginWidth"}
+          sx={{ width: margin }}
           border={"1px dashed"}
           borderColor={"primary.main"}
           borderLeft={0}
           borderRight={0}
-        ></Box>
+        />
         <LayoutContainer>
           <Grid container>
-            <Grid item xs={4}>
+            <Grid item md={4} sm={8} xs={10}>
               <Grid container>
-                <Grid item xs={6}>
+                <Grid item lg={6} md={8} sm={8} xs={8}>
                   <FarazAhmad />
                 </Grid>
-                <Grid item xs={6}>
-                  <StatusIndicator />
-                </Grid>
+                {!token ? (
+                  <Grid item lg={6} md={4} sm={4} xs={4}>
+                    <StatusIndicator />
+                  </Grid>
+                ) : null}
               </Grid>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item md={8} sm={4} xs={2}>
               <Grid container height={"100%"}>
                 <Grid
                   item
-                  xs={6}
+                  md={6}
+                  xs={0}
                   display={"flex"}
                   justifyContent={"center"}
                   alignItems={"center"}
+                  sx={{
+                    display: {
+                      md: "flex", // Show on tablet screens
+                      xs: "none", // Hide on small screens
+                    },
+                  }}
                 >
                   {token ? (
                     <Stack
@@ -93,12 +107,15 @@ const Navbar = () => {
                       <img
                         src="/assets/navbarLogo.svg"
                         alt="Logo"
-                        style={{ width: 40, height: "auto" }}
+                        style={{
+                          width: 40,
+                          height: "auto",
+                        }}
                       />
                     </IconButton>
                   )}
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item md={6} xs={12}>
                   <Grid container height={"100%"}>
                     {token ? (
                       <Grid
@@ -115,6 +132,12 @@ const Navbar = () => {
                           endIcon={<LogoutIcon />}
                           disableElevation
                           onClick={logoutAdmin}
+                          sx={{
+                            display: {
+                              lg: "flex", // Show on large screens
+                              xs: "none", // Hide on small screens
+                            },
+                          }}
                         >
                           <Typography variant="h5" fontSize={24}>
                             Log Out
@@ -122,22 +145,27 @@ const Navbar = () => {
                         </Button>
                       </Grid>
                     ) : (
-                      <Grid
-                        item
-                        xs={9}
-                        display={"flex"}
-                        justifyContent={"space-around"}
-                        alignItems={"center"}
-                      >
-                        <NavigationHashLink
-                          to={"/#projects"}
-                          label={"Projects"}
-                        />
-                        <NavigationHashLink to={"/#skill"} label={"Skills"} />
-                        <NavigationHashLink
-                          to={"/#contact"}
-                          label={"Contact"}
-                        />
+                      <Grid item xs={9}>
+                        <Box
+                          justifyContent={"space-around"}
+                          alignItems={"center"}
+                          sx={{
+                            display: {
+                              lg: "flex", // Show on large screens
+                              xs: "none", // Hide on small screens
+                            },
+                          }}
+                        >
+                          <NavigationHashLink
+                            to={"/#projects"}
+                            label={"Projects"}
+                          />
+                          <NavigationHashLink to={"/#skill"} label={"Skills"} />
+                          <NavigationHashLink
+                            to={"/#contact"}
+                            label={"Contact"}
+                          />
+                        </Box>
                       </Grid>
                     )}
 
@@ -146,6 +174,7 @@ const Navbar = () => {
                       xs={3}
                       display={"flex"}
                       justifyContent={"flex-end"}
+                      alignItems={"center"}
                       position={"relative"}
                     >
                       <Stack
@@ -153,10 +182,23 @@ const Navbar = () => {
                         spacing={1}
                         position={"absolute"}
                         top={"-20px"}
+                        sx={{
+                          display: {
+                            lg: "flex", // Show on large screens
+                            xs: "none", // Hide on small screens
+                          },
+                        }}
                       >
                         <ThemeSwitch mode={"darkMode"} />
                         <ThemeSwitch mode={"lightMode"} />
                       </Stack>
+                      {currentBreakpoint === "xs" ? (
+                        <NavbarMenu token={token} logoutAdmin={logoutAdmin} />
+                      ) : currentBreakpoint === "sm" ? (
+                        <NavbarMenu token={token} logoutAdmin={logoutAdmin} />
+                      ) : currentBreakpoint === "md" ? (
+                        <NavbarMenu token={token} logoutAdmin={logoutAdmin} />
+                      ) : null}
                     </Grid>
                   </Grid>
                 </Grid>
@@ -164,7 +206,7 @@ const Navbar = () => {
             </Grid>
           </Grid>
         </LayoutContainer>
-        <Box className={"horizontalMarginWidth"} visibility={"hidden"}></Box>
+        <Box sx={{ width: margin }} visibility={"hidden"} />
       </Stack>
     </Box>
   );

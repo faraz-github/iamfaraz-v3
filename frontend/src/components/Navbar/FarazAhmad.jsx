@@ -1,5 +1,5 @@
-import { Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
+import { Box, IconButton, Stack, Typography } from "@mui/material";
 
 const FarazAhmad = () => {
   return (
@@ -10,16 +10,43 @@ const FarazAhmad = () => {
       width="fit-content"
       pr={1}
     >
-      <Typography
-        component={Link}
-        to={"/"}
-        variant="h2"
-        fontSize={48}
-        color={"primary.main"}
-        textTransform={"lowercase"}
-      >
-        Faraz Ahmad
-      </Typography>
+      <Stack direction={"row"} alignItems={"center"}>
+        <IconButton
+          component={Link}
+          to={"/aboutme"}
+          aria-label="logo"
+          sx={{
+            display: {
+              md: "none", // Hide on tablet screens
+              xs: "flex", // Show on small screens
+            },
+          }}
+        >
+          <img
+            src="/assets/navbarLogo.svg"
+            alt="Logo"
+            style={{
+              width: 40,
+              height: "auto",
+            }}
+          />
+        </IconButton>
+        <Typography
+          component={Link}
+          to={"/"}
+          variant="h2"
+          sx={{
+            fontSize: {
+              sm: 48,
+              xs: 40,
+            },
+          }}
+          color={"primary.main"}
+          textTransform={"lowercase"}
+        >
+          Faraz Ahmad
+        </Typography>
+      </Stack>
     </Box>
   );
 };
