@@ -9,7 +9,10 @@ const SkillCard = ({ logoUrl, name, description }) => {
         bgcolor={"primary.main"}
         borderRadius={(theme) => theme.shape.borderRadius}
         sx={{
-          transform: "rotate(45deg)",
+          transition: "border-radius 0.3s ease",
+          ":hover": {
+            borderRadius: "50%",
+          },
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -20,9 +23,8 @@ const SkillCard = ({ logoUrl, name, description }) => {
           src={logoUrl}
           alt={name}
           style={{
-            width: 30,
+            width: 35,
             height: "auto",
-            transform: "rotate(-45deg)",
             filter: "drop-shadow(0 0 1px #fff)",
           }}
         />

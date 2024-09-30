@@ -36,7 +36,11 @@ const DisplaySwitch = ({ skillType, setSkillType }) => {
         border: "2px solid",
         borderColor: "primary.main",
         borderRadius: (theme) => theme.shape.borderRadius,
-        width: "200px",
+        width: {
+          lg: "200px",
+          sm: "200px",
+          xs: "150px",
+        },
         display: "flex",
       }}
     >
@@ -57,7 +61,6 @@ const DisplaySwitch = ({ skillType, setSkillType }) => {
       >
         <Typography
           variant="body2"
-          fontSize={22}
           color={"primary.main"}
           textTransform={"capitalize"}
           position={"absolute"}
@@ -68,18 +71,29 @@ const DisplaySwitch = ({ skillType, setSkillType }) => {
               ? styles.transitionElementDown
               : ""
           }
+          sx={{
+            fontSize: {
+              lg: 22,
+              sm: 22,
+              xs: 18,
+            },
+          }}
         >
           {skillType}
         </Typography>
 
         <Typography
           variant="body2"
-          fontSize={22}
           color={"primary.main"}
           textTransform={"capitalize"}
           position={"absolute"}
           sx={{
             display: centerAppear ? "block" : "none",
+            fontSize: {
+              lg: 22,
+              sm: 22,
+              xs: 18,
+            },
           }}
         >
           {skillType}

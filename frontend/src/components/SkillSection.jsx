@@ -44,13 +44,13 @@ const SkillSection = () => {
             <DisplaySwitch skillType={skillType} setSkillType={setSkillType} />
           </Box>
         </Box>
-        <Grid container mt={2}>
+        <Grid container mt={2} spacing={2}>
           {tools.length
             ? tools
                 .filter((item) => item.category === skillType)
                 .map((tool, index) => {
                   return (
-                    <Grid item xs={2} key={index}>
+                    <Grid item lg={2} md={3} sm={4} xs={6} key={index}>
                       <SkillCard
                         logoUrl={tool.icon}
                         name={tool.name}
