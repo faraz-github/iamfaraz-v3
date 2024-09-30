@@ -5,8 +5,8 @@ const SectionBox = ({ id, halfScreenHeight, children }) => {
     <Box
       id={id}
       component="section"
-      minHeight={halfScreenHeight ? "50vh" : "90vh"}
-      pb={1}
+      minHeight={halfScreenHeight ? "50vh" : "fit-content"}
+      pb={4}
     >
       {children}
     </Box>

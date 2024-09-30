@@ -43,7 +43,16 @@ const StyledLine = ({
       ) : null}
 
       {centerText ? (
-        <Typography variant="h5" fontSize="22" color="primary.main">
+        <Typography
+          variant="h5"
+          sx={{
+            fontSize: {
+              lg: 22,
+              md: 18,
+            },
+          }}
+          color="primary.main"
+        >
           {centerText}
         </Typography>
       ) : null}

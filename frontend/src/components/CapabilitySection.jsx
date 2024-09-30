@@ -6,16 +6,32 @@ import SectionBox from "./ui/SectionBox";
 import SectionHeading from "./ui/SectionHeading";
 import StyledLine from "./ui/StyledLine";
 
+import useDynamicMargin from "../hooks/useDynamicMargin";
+
 const CapabilitySection = () => {
+  const margin = useDynamicMargin();
+
   const [isHovered, setIsHovered] = useState(null);
 
   return (
-    <SectionBox id="capability" halfScreenHeight>
-      <Stack direction={"row"} alignItems={"flex-end"}>
+    <SectionBox id="capability">
+      <LayoutContainer>
+        <SectionHeading heading="Capabilities" />
+      </LayoutContainer>
+      <Stack direction={"row"}>
         <Box
-          className={"horizontalMarginWidth"}
           bgcolor={"background.paper"}
-          height={400}
+          width={margin}
+          sx={{
+            height: {
+              lg: 400,
+              md: 300,
+              xs: 300,
+            },
+            alignSelf: {
+              xs: "flex-start",
+            },
+          }}
           position={"relative"}
           onMouseEnter={() => setIsHovered("left")}
           onMouseLeave={() => setIsHovered(null)}
@@ -30,18 +46,37 @@ const CapabilitySection = () => {
           ) : null}
         </Box>
         <LayoutContainer>
-          <SectionHeading heading="Capabilities" />
           <Grid container>
-            <Grid item xs={4} sx={{ pr: 1 }}>
+            <Grid
+              item
+              lg={4}
+              md={4}
+              xs={12}
+              sx={{
+                pr: {
+                  lg: 1,
+                  md: 1,
+                  xs: 0,
+                },
+              }}
+            >
               <Box
                 bgcolor={"background.paper"}
-                height={400}
-                borderRadius={"0 50% 0 0"}
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   position: "relative",
+                  height: {
+                    lg: 400,
+                    md: 300,
+                    xs: 300,
+                  },
+                  borderRadius: {
+                    lg: "0 50% 0 0",
+                    md: "0 50% 0 0",
+                    xs: "0 125px 0 0",
+                  },
                 }}
                 onMouseEnter={() => setIsHovered("left")}
                 onMouseLeave={() => setIsHovered(null)}
@@ -49,7 +84,13 @@ const CapabilitySection = () => {
                 <Stack alignItems={"center"}>
                   <Typography
                     variant="h1"
-                    fontSize={40}
+                    sx={{
+                      fontSize: {
+                        lg: 40,
+                        md: 32,
+                        xs: 32,
+                      },
+                    }}
                     color={"primary.main"}
                     gutterBottom
                   >
@@ -67,8 +108,15 @@ const CapabilitySection = () => {
                       position={"absolute"}
                       height={"100%"}
                       width={"100%"}
-                      borderRadius={"0 50% 0 0"}
-                      sx={{ backgroundColor: "secondary.main", opacity: "85%" }}
+                      sx={{
+                        backgroundColor: "secondary.main",
+                        opacity: "85%",
+                        borderRadius: {
+                          lg: "0 50% 0 0",
+                          md: "0 50% 0 0",
+                          xs: "0 125px 0 0",
+                        },
+                      }}
                     ></Box>
                     <Stack width={"75%"} spacing={5} position={"absolute"}>
                       <StyledLine
@@ -97,16 +145,24 @@ const CapabilitySection = () => {
                 ) : null}
               </Box>
             </Grid>
-            <Grid item xs={4}>
+            <Grid item lg={4} md={4} xs={12}>
               <Box
                 bgcolor={"background.paper"}
-                height={400}
-                borderRadius={"50% 50% 0 0"}
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   position: "relative",
+                  height: {
+                    lg: 400,
+                    md: 300,
+                    xs: 300,
+                  },
+                  borderRadius: {
+                    lg: "50% 50% 0 0",
+                    md: "50% 50% 0 0",
+                    xs: "0 0 0 0",
+                  },
                 }}
                 onMouseEnter={() => setIsHovered("middle")}
                 onMouseLeave={() => setIsHovered(null)}
@@ -114,7 +170,13 @@ const CapabilitySection = () => {
                 <Stack alignItems={"center"}>
                   <Typography
                     variant="h1"
-                    fontSize={40}
+                    sx={{
+                      fontSize: {
+                        lg: 40,
+                        md: 32,
+                        xs: 32,
+                      },
+                    }}
                     color={"primary.main"}
                     gutterBottom
                   >
@@ -132,8 +194,15 @@ const CapabilitySection = () => {
                       position={"absolute"}
                       height={"100%"}
                       width={"100%"}
-                      borderRadius={"50% 50% 0 0"}
-                      sx={{ backgroundColor: "secondary.main", opacity: "85%" }}
+                      sx={{
+                        backgroundColor: "secondary.main",
+                        opacity: "85%",
+                        borderRadius: {
+                          lg: "50% 50% 0 0",
+                          md: "50% 50% 0 0",
+                          xs: "0 0 0 0",
+                        },
+                      }}
                     ></Box>
                     <Stack width={"70%"} spacing={5} position={"absolute"}>
                       <StyledLine
@@ -165,16 +234,36 @@ const CapabilitySection = () => {
                 ) : null}
               </Box>
             </Grid>
-            <Grid item xs={4} sx={{ pl: 1 }}>
+            <Grid
+              item
+              lg={4}
+              md={4}
+              xs={12}
+              sx={{
+                pl: {
+                  lg: 1,
+                  md: 1,
+                  xs: 0,
+                },
+              }}
+            >
               <Box
                 bgcolor={"background.paper"}
-                height={400}
-                borderRadius={"50% 0 0 0"}
                 sx={{
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   position: "relative",
+                  height: {
+                    lg: 400,
+                    md: 300,
+                    xs: 300,
+                  },
+                  borderRadius: {
+                    lg: "50% 0 0 0",
+                    md: "50% 0 0 0",
+                    xs: "0 0 0 125px",
+                  },
                 }}
                 onMouseEnter={() => setIsHovered("right")}
                 onMouseLeave={() => setIsHovered(null)}
@@ -182,7 +271,13 @@ const CapabilitySection = () => {
                 <Stack alignItems={"center"}>
                   <Typography
                     variant="h1"
-                    fontSize={40}
+                    sx={{
+                      fontSize: {
+                        lg: 40,
+                        md: 32,
+                        xs: 32,
+                      },
+                    }}
                     color={"primary.main"}
                     gutterBottom
                   >
@@ -200,8 +295,15 @@ const CapabilitySection = () => {
                       position={"absolute"}
                       height={"100%"}
                       width={"100%"}
-                      borderRadius={"50% 0 0 0"}
-                      sx={{ backgroundColor: "secondary.main", opacity: "85%" }}
+                      sx={{
+                        backgroundColor: "secondary.main",
+                        opacity: "85%",
+                        borderRadius: {
+                          lg: "50% 0 0 0",
+                          md: "50% 0 0 0",
+                          xs: "0 0 0 125px",
+                        },
+                      }}
                     ></Box>
                     <Stack width={"75%"} spacing={5} position={"absolute"}>
                       <StyledLine
@@ -233,9 +335,18 @@ const CapabilitySection = () => {
           </Grid>
         </LayoutContainer>
         <Box
-          className={"horizontalMarginWidth"}
           bgcolor={"background.paper"}
-          height={400}
+          width={margin}
+          sx={{
+            height: {
+              lg: 400,
+              md: 300,
+              sm: 300,
+            },
+            alignSelf: {
+              xs: "flex-end",
+            },
+          }}
           position={"relative"}
           onMouseEnter={() => setIsHovered("right")}
           onMouseLeave={() => setIsHovered(null)}

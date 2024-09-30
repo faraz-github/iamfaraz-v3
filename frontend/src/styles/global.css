@@ -25,9 +25,5 @@ a {
   box-sizing: border-box;
 }
 
-.horizontalMarginWidth {
-  width: calc((100vw - 1200px) / 2);
-}
-
 /* TODO features to add */
 /* 1. For the tablet and mobile view we have to calculate horizontalMarginWidth width*/
