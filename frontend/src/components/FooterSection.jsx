@@ -16,22 +16,28 @@ const FooterSection = () => {
   const iconMapping = {
     WhatsApp: (
       <WhatsAppIcon
-        fontSize="medium"
         color="primary.main"
         sx={{
           ":hover": {
             color: "secondary.main",
+          },
+          fontSize: {
+            md: "32px",
+            xs: "32px",
           },
         }}
       />
     ),
     GitHub: (
       <GitHubIcon
-        fontSize="medium"
         color="primary.main"
         sx={{
           ":hover": {
             color: "secondary.main",
+          },
+          fontSize: {
+            md: "32px",
+            xs: "32px",
           },
         }}
       />
@@ -65,69 +71,145 @@ const FooterSection = () => {
           sx={{
             minHeight: "50vh",
             borderRadius: "200px 200px 0 0",
-            mt: 5,
-            mb: -1,
+            mt: 15,
+            mb: -4,
             pt: 15,
             pl: 5,
             pr: 5,
             position: "relative",
           }}
         >
+          <Box
+            sx={{
+              position: "absolute",
+              left: "50%",
+              transform: "translateX(-50%) rotate(45deg)",
+              backgroundColor: (theme) => theme.palette.background.paper,
+              border: "1px solid",
+              borderColor: (theme) => theme.palette.background.default,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: {
+                lg: 150,
+                md: 120,
+                sm: 100,
+                xs: 100,
+              },
+              height: {
+                lg: 150,
+                md: 120,
+                sm: 100,
+                xs: 100,
+              },
+              top: {
+                lg: -75,
+                md: -60,
+                sm: -50,
+                xs: -50,
+              },
+              borderRadius: {
+                lg: "25px",
+                md: "20px",
+                sm: "15px",
+                xs: "15px",
+              },
+            }}
+          >
+            <Box
+              sx={{
+                backgroundColor: (theme) => theme.palette.secondary.main,
+                width: {
+                  lg: 100,
+                  md: 80,
+                  sm: 60,
+                  xs: 60,
+                },
+                height: {
+                  lg: 100,
+                  md: 80,
+                  sm: 60,
+                  xs: 60,
+                },
+                borderRadius: {
+                  lg: "25px",
+                  md: "20px",
+                  sm: "15px",
+                  xs: "15px",
+                },
+              }}
+            ></Box>
+          </Box>
           <Grid container>
-            <Grid item xs={3} pl={10}>
+            <Grid item md={3} xs={6} sx={{ pl: { md: 10, xs: 5 } }}>
               <Typography
                 variant="h5"
-                fontSize={24}
                 color={"primary.light"}
                 gutterBottom
+                sx={{ fontSize: { md: 24, xs: 20 } }}
               >
                 Faraz Ahmad
               </Typography>
-              <Typography variant="body2" fontSize={18} color={"primary.light"}>
+              <Typography
+                variant="body2"
+                color={"primary.light"}
+                sx={{ fontSize: { md: 18, xs: 16 } }}
+              >
                 Lucknow
               </Typography>
               <Typography
                 variant="body2"
-                fontSize={18}
                 color={"primary.light"}
                 mt={-0.5}
+                sx={{ fontSize: { md: 18, xs: 16 } }}
               >
                 Uttar Pradesh, India
               </Typography>
               <Typography
                 variant="h5"
-                fontSize={18}
                 color={"primary.light"}
                 gutterBottom
+                sx={{ fontSize: { md: 18, xs: 16 } }}
               >
                 226021
               </Typography>
             </Grid>
-            <Grid item xs={3} pl={10}>
+            <Grid item md={3} xs={6} sx={{ pl: { md: 10, xs: 5 } }}>
               <Typography
                 variant="h5"
-                fontSize={24}
                 color={"primary.main"}
                 gutterBottom
+                sx={{ fontSize: { md: 24, xs: 20 } }}
               >
                 Terms & Conditions
               </Typography>
               <Typography
                 variant="h5"
-                fontSize={24}
                 color={"primary.main"}
                 gutterBottom
+                sx={{ fontSize: { md: 24, xs: 20 } }}
               >
                 Privacy Policy
               </Typography>
             </Grid>
-            <Grid item xs={3} />
             <Grid
               item
-              xs={3}
+              md={3}
+              xs={12}
+              sx={{
+                minHeight: {
+                  md: 0,
+                  xs: 50,
+                },
+              }}
+            />
+            <Grid
+              item
+              md={3}
+              xs={12}
               px={5}
               display={"flex"}
-              justifyContent={"flex-end"}
+              justifyContent={"center"}
             >
               <Stack direction={"row"} spacing={2}>
                 {socials.length
