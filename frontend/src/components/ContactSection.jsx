@@ -13,8 +13,11 @@ import MessageMeModal from "./ui/MessageMeModal";
 import MeetingModal from "./ui/MeetingModal";
 
 import { statusColor, statusText } from "./Navbar/StatusIndicator";
+import useCurrentBreakpoint from "../hooks/useCurrentBreakpoint";
 
 const ContactSection = () => {
+  const currentBreakpoint = useCurrentBreakpoint();
+
   const [openMessageModal, setOpenMessageModal] = useState(false);
   const [openMettingModal, setOpenMeetingModal] = useState(false);
 
@@ -59,32 +62,80 @@ const ContactSection = () => {
   return (
     <SectionBox id="contact" halfScreenHeight>
       <LayoutContainer>
-        <StyledLine
-          color={"primary.main"}
-          thickness={1}
-          leftOrnament
-          rightOrnament
-        />
+        {currentBreakpoint === "sm" ? null : currentBreakpoint ===
+          "xs" ? null : (
+          <StyledLine
+            color={"primary.main"}
+            thickness={2}
+            leftOrnament
+            rightOrnament
+          />
+        )}
+
         <Grid container>
-          <Grid item xs={6} p={10}>
-            <Stack spacing={2}>
+          <Grid
+            item
+            md={6}
+            xs={12}
+            sx={{
+              p: {
+                md: 10,
+                sm: 5,
+                xs: 5,
+              },
+            }}
+          >
+            <Stack
+              spacing={2}
+              sx={{
+                textAlign: {
+                  md: "left",
+                  sm: "center",
+                  xs: "center",
+                },
+              }}
+            >
               <Typography
                 variant="h1"
-                fontSize={40}
                 color={"primary.main"}
                 gutterBottom
+                sx={{
+                  fontSize: {
+                    lg: 40,
+                    md: 34,
+                    sm: 40,
+                    xs: 36,
+                  },
+                }}
               >
                 Are you looking for me?
               </Typography>
               <Typography
                 variant="h3"
-                fontSize={32}
                 color={"primary.main"}
                 gutterBottom
+                sx={{
+                  fontSize: {
+                    lg: 32,
+                    md: 28,
+                    sm: 32,
+                    xs: 30,
+                  },
+                }}
               >
                 Let's talk about your project!
               </Typography>
-              <Stack direction="row" spacing={2}>
+              <Stack
+                direction="row"
+                spacing={2}
+                sx={{
+                  justifyContent: {
+                    md: "flex-start",
+                    sm: "center",
+                    xs: "center",
+                  },
+                }}
+              >
                 <Button
                   variant="contained"
                   color="secondary"
@@ -106,84 +157,163 @@ const ContactSection = () => {
               </Stack>
             </Stack>
           </Grid>
-          <Grid item xs={6} display={"flex"} justifyContent={"center"}>
-            <Box
-              width={400}
-              height={300}
-              bgcolor={"primary.main"}
-              position={"relative"}
-              display={"flex"}
-              justifyContent={"center"}
-              alignItems={"center"}
-            >
-              <Stack alignItems={"center"} spacing={4}>
-                <Stack direction={"row"} spacing={2}>
-                  <Box
-                    width={30}
-                    height={30}
-                    border="1px solid"
-                    borderColor={statusColor(status)}
-                    borderRadius={(theme) => theme.shape.borderRadius}
-                    sx={{ transform: "rotate(45deg)" }}
-                    display={"flex"}
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                  >
+          <Grid
+            item
+            md={6}
+            xs={12}
+            display={"flex"}
+            justifyContent={"center"}
+            sx={{
+              pb: {
+                md: 0,
+                sm: 15,
+                xs: 10,
+              },
+            }}
+          >
+            <Stack width={"100%"}>
+              {currentBreakpoint === "sm" ? (
+                <StyledLine
+                  color={"primary.main"}
+                  thickness={2}
+                  leftOrnament
+                  rightOrnament
+                />
+              ) : currentBreakpoint === "xs" ? (
+                <StyledLine
+                  color={"primary.main"}
+                  thickness={2}
+                  leftOrnament
+                  rightOrnament
+                  rightMargin={2}
+                  leftMargin={2}
+                />
+              ) : null}
+              <Box
+                width={400}
+                height={300}
+                bgcolor={"primary.main"}
+                position={"relative"}
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                mx={"auto"}
+                sx={{
+                  width: {
+                    sm: 400,
+                    xs: 300,
+                  },
+                  height: {
+                    sm: 300,
+                    xs: 250,
+                  },
+                }}
+              >
+                <Stack alignItems={"center"} spacing={4}>
+                  <Stack direction={"row"} spacing={2}>
                     <Box
-                      width={20}
-                      height={20}
-                      bgcolor={statusColor(status)}
+                      width={30}
+                      height={30}
+                      border="1px solid"
+                      borderColor={statusColor(status)}
                       borderRadius={(theme) => theme.shape.borderRadius}
-                    ></Box>
-                  </Box>
-                  <Typography
-                    variant="h6"
-                    fontSize={24}
-                    color={statusColor(status)}
-                  >
-                    {statusText(status)}
-                  </Typography>
+                      sx={{ transform: "rotate(45deg)" }}
+                      display={"flex"}
+                      justifyContent={"center"}
+                      alignItems={"center"}
+                    >
+                      <Box
+                        width={20}
+                        height={20}
+                        bgcolor={statusColor(status)}
+                        borderRadius={(theme) => theme.shape.borderRadius}
+                      ></Box>
+                    </Box>
+                    <Typography
+                      variant="h6"
+                      fontSize={24}
+                      color={statusColor(status)}
+                    >
+                      {statusText(status)}
+                    </Typography>
+                  </Stack>
+                  <Stack direction={"row"} spacing={2} alignItems={"center"}>
+                    <EmailRoundedIcon
+                      fontSize="large"
+                      sx={{ color: (theme) => theme.palette.background.paper }}
+                    />
+                    <Typography
+                      variant="body2"
+                      color={(theme) => theme.palette.background.paper}
+                      sx={{
+                        fontSize: {
+                          sm: 20,
+                          xs: 18,
+                        },
+                      }}
+                    >
+                      {contact?.email}
+                    </Typography>
+                  </Stack>
+                  <Stack direction={"row"} spacing={2} alignItems={"center"}>
+                    <PhoneAndroidRoundedIcon
+                      fontSize="large"
+                      sx={{ color: (theme) => theme.palette.background.paper }}
+                    />
+                    <Typography
+                      variant="h5"
+                      fontSize={24}
+                      color={(theme) => theme.palette.background.paper}
+                    >
+                      {contact?.phone}
+                    </Typography>
+                  </Stack>
                 </Stack>
-                <Stack direction={"row"} spacing={2} alignItems={"center"}>
-                  <EmailRoundedIcon
-                    fontSize="large"
-                    sx={{ color: (theme) => theme.palette.background.paper }}
-                  />
-                  <Typography
-                    variant="body2"
-                    fontSize={20}
-                    color={(theme) => theme.palette.background.paper}
-                  >
-                    {contact?.email}
-                  </Typography>
+                <Stack
+                  direction={"row"}
+                  position={"absolute"}
+                  sx={{
+                    bottom: {
+                      sm: -100,
+                      xs: -75,
+                    },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      borderTop: {
+                        sm: "100px solid",
+                        xs: "75px solid",
+                      },
+                      borderRight: {
+                        sm: "200px solid transparent",
+                        xs: "150px solid transparent",
+                      },
+                      borderTopColor: (theme) => ({
+                        sm: theme.palette.primary.main,
+                        xs: theme.palette.primary.main,
+                      }),
+                    }}
+                  ></Box>
+                  <Box
+                    sx={{
+                      borderTop: {
+                        sm: "100px solid",
+                        xs: "75px solid",
+                      },
+                      borderLeft: {
+                        sm: "200px solid transparent",
+                        xs: "150px solid transparent",
+                      },
+                      borderTopColor: (theme) => ({
+                        sm: theme.palette.primary.main,
+                        xs: theme.palette.primary.main,
+                      }),
+                    }}
+                  ></Box>
                 </Stack>
-                <Stack direction={"row"} spacing={2} alignItems={"center"}>
-                  <PhoneAndroidRoundedIcon
-                    fontSize="large"
-                    sx={{ color: (theme) => theme.palette.background.paper }}
-                  />
-                  <Typography
-                    variant="h5"
-                    fontSize={24}
-                    color={(theme) => theme.palette.background.paper}
-                  >
-                    {contact?.phone}
-                  </Typography>
-                </Stack>
-              </Stack>
-              <Stack direction={"row"} position={"absolute"} bottom={-100}>
-                <Box
-                  borderTop={"100px solid"}
-                  borderColor={(theme) => theme.palette.primary.main}
-                  borderRight={"200px solid transparent"}
-                ></Box>
-                <Box
-                  borderTop={"100px solid"}
-                  borderColor={(theme) => theme.palette.primary.main}
-                  borderLeft={"200px solid transparent"}
-                ></Box>
-              </Stack>
-            </Box>
+              </Box>
+            </Stack>
           </Grid>
         </Grid>
       </LayoutContainer>

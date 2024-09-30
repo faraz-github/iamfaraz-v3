@@ -82,7 +82,7 @@ const MessageMeModal = ({ open, handleClose }) => {
         borderRadius: (theme) => theme.shape.borderRadius,
       }}
     >
-      <Paper sx={{ p: 4, minWidth: "800px" }}>
+      <Paper sx={{ p: 4 }}>
         <Box display={"flex"} alignItems={"center"}>
           <Typography
             variant="h3"
@@ -103,7 +103,7 @@ const MessageMeModal = ({ open, handleClose }) => {
         </Box>
         <form onSubmit={onSubmitHandler}>
           <Grid container spacing={2}>
-            <Grid item xs={6}>
+            <Grid item md={6} sm={12} xs={12}>
               <FormLabel>
                 <Typography
                   variant="h5"
@@ -141,7 +141,7 @@ const MessageMeModal = ({ open, handleClose }) => {
                 }}
               />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item md={6} sm={12} xs={12}>
               <FormLabel>
                 <Typography
                   variant="h5"
@@ -225,7 +225,7 @@ const MessageMeModal = ({ open, handleClose }) => {
               variant="contained"
               color="secondary"
               size="large"
-              sx={{ borderRadius: 15, mt: 2 }}
+              sx={{ borderRadius: 15, mt: 3 }}
               type="submit"
               disabled={isSubmitting}
             >
