@@ -12,7 +12,11 @@ import DocumentModal from "./ui/DocumentModal";
 
 import { policyContent } from "../constants/policyContent";
 
+import useCurrentBreakpoint from "../hooks/useCurrentBreakpoint";
+
 const FooterSection = () => {
+  const currentBreakpoint = useCurrentBreakpoint();
+
   // state
   const [socials, setSocials] = useState([]);
   const [openTermsModal, setOpenTermsModal] = useState(false);
@@ -71,14 +75,13 @@ const FooterSection = () => {
 
   return (
     <SectionBox id="footer" halfScreenHeight>
-      <LayoutContainer>
+      <LayoutContainer disableGutters={true}>
         <Paper
           elevation={0}
           sx={{
             minHeight: "50vh",
             borderRadius: "200px 200px 0 0",
             mt: 15,
-            mb: -4,
             pt: 15,
             pl: 5,
             pr: 5,

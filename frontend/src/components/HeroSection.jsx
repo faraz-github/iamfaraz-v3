@@ -49,8 +49,10 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <SectionBox id="hero" halfScreenHeight>
-      <LayoutContainer>
+    <SectionBox id="hero" halfScreenHeight paddingBottom={5}>
+      <LayoutContainer
+        disableGutters={currentBreakpoint === "xs" ? false : true}
+      >
         <Grid
           container
           sx={{
@@ -208,7 +210,19 @@ const HeroSection = () => {
               }}
             />
           </Grid>
-          <Grid item md={3} xs={12} p={2}>
+          <Grid
+            item
+            md={3}
+            xs={12}
+            sx={{
+              pl: {
+                lg: 2,
+              },
+              py: {
+                xs: 2,
+              },
+            }}
+          >
             <Box
               p={2}
               border={"1px dashed"}
@@ -276,7 +290,7 @@ const HeroSection = () => {
                   }}
                   mr={1}
                 >
-                  View my work
+                  View work
                 </Typography>
               </Button>
             </HashLink>

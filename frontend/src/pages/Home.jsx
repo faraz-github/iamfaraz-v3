@@ -13,7 +13,6 @@ import ProjectSection from "../components/ProjectSection";
 import CapabilitySection from "../components/CapabilitySection";
 import SkillSection from "../components/SkillSection";
 import ContactSection from "../components/ContactSection";
-import FooterSection from "../components/FooterSection";
 
 function Home() {
   const navigate = useNavigate();
@@ -41,7 +40,6 @@ function Home() {
       <CapabilitySection />
       <SkillSection />
       <ContactSection />
-      <FooterSection />
       {backToTop && (
         <Fab
           onClick={() =>

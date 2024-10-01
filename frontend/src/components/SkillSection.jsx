@@ -9,7 +9,10 @@ import SectionBox from "./ui/SectionBox";
 import SectionHeading from "./ui/SectionHeading";
 import SkillCard from "./ui/SkillCard";
 
+import useCurrentBreakpoint from "../hooks/useCurrentBreakpoint";
+
 const SkillSection = () => {
+  const currentBreakpoint = useCurrentBreakpoint();
   // state
   const [tools, setTools] = useState([]);
   const [skillType, setSkillType] = useState("development");
@@ -34,8 +37,8 @@ const SkillSection = () => {
   }, []);
 
   return (
-    <SectionBox id="skill" halfScreenHeight>
-      <LayoutContainer>
+    <SectionBox id="skill" halfScreenHeight paddingBottom={5}>
+      <LayoutContainer disableGutters={currentBreakpoint === "xs" ? false : true}>
         <Box display={"flex"} alignItems={"flex-end"}>
           <Box flexGrow={1}>
             <SectionHeading heading="Skills" />

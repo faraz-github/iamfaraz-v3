@@ -29,6 +29,7 @@ import AboutMe from "./pages/AboutMe";
 // Components
 import Navbar from "./components/Navbar/Navbar";
 import Loader from "./components/Loader";
+import FooterSection from "./components/FooterSection";
 
 function AppContent() {
   const { theme } = useColorTheme();
@@ -58,6 +59,7 @@ function AppContent() {
             <Route path="/pending" element={<PendingApproval />} />
             <Route path="/aboutme" element={<AboutMe />} />
           </Routes>
+          <FooterSection />
           <Loader />
           <ToastContainer theme="colored" />
         </LoadingProvider>

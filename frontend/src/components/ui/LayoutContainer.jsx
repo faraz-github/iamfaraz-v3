@@ -1,8 +1,8 @@
 import { Container } from "@mui/material";
 
-const LayoutContainer = ({ children }) => {
+const LayoutContainer = ({ children, disableGutters }) => {
   return (
-    <Container maxWidth="lg" fixed disableGutters>
+    <Container maxWidth="lg" fixed disableGutters={disableGutters}>
       {children}
     </Container>
   );

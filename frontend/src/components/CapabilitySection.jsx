@@ -71,8 +71,10 @@ const CapabilitySection = () => {
   }, []);
 
   return (
-    <SectionBox id="capability">
-      <LayoutContainer>
+    <SectionBox id="capability" paddingBottom={5}>
+      <LayoutContainer
+        disableGutters={currentBreakpoint === "xs" ? false : true}
+      >
         <SectionHeading heading="Capabilities" />
       </LayoutContainer>
       <Stack direction={"row"}>
@@ -102,7 +104,7 @@ const CapabilitySection = () => {
             ></Box>
           ) : null}
         </Box>
-        <LayoutContainer>
+        <LayoutContainer disableGutters={true}>
           <Grid container>
             <Grid
               item

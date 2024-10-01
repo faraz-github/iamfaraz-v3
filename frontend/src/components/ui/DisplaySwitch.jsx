@@ -39,7 +39,7 @@ const DisplaySwitch = ({ skillType, setSkillType }) => {
         width: {
           lg: "200px",
           sm: "200px",
-          xs: "150px",
+          xs: "175px",
         },
         display: "flex",
       }}

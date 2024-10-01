@@ -60,8 +60,10 @@ const ContactSection = () => {
   }, []);
 
   return (
-    <SectionBox id="contact" halfScreenHeight>
-      <LayoutContainer>
+    <SectionBox id="contact" halfScreenHeight paddingBottom={5}>
+      <LayoutContainer
+        disableGutters={currentBreakpoint === "xs" ? false : true}
+      >
         {currentBreakpoint === "sm" ? null : currentBreakpoint ===
           "xs" ? null : (
           <StyledLine
@@ -185,8 +187,6 @@ const ContactSection = () => {
                   thickness={2}
                   leftOrnament
                   rightOrnament
-                  rightMargin={2}
-                  leftMargin={2}
                 />
               ) : null}
               <Box

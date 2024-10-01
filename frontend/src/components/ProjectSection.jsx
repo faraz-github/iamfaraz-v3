@@ -8,7 +8,11 @@ import SectionBox from "./ui/SectionBox";
 import SectionHeading from "./ui/SectionHeading";
 import ProjectCard from "./ui/ProjectCard";
 
+import useCurrentBreakpoint from "../hooks/useCurrentBreakpoint";
+
 const ProjectSection = () => {
+  const currentBreakpoint = useCurrentBreakpoint();
+
   // state
   const [projects, setProjects] = useState([]);
 
@@ -52,10 +56,12 @@ const ProjectSection = () => {
   }, []);
 
   return (
-    <SectionBox id="projects" halfScreenHeight>
-      <LayoutContainer>
+    <SectionBox id="projects" halfScreenHeight paddingBottom={5}>
+      <LayoutContainer
+        disableGutters={currentBreakpoint === "xs" ? false : true}
+      >
         <SectionHeading heading="Projects" />
-        <Grid container spacing={2} p={1}>
+        <Grid container spacing={2}>
           {projects.length
             ? projects.map((project, index) => {
                 return (

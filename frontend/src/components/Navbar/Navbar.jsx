@@ -42,7 +42,7 @@ const Navbar = () => {
           borderLeft={0}
           borderRight={0}
         />
-        <LayoutContainer>
+        <LayoutContainer disableGutters={true}>
           <Grid container>
             <Grid item md={4} sm={8} xs={10}>
               <Grid container>

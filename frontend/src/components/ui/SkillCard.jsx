@@ -2,7 +2,7 @@ import { Box, Stack, Tooltip, Typography } from "@mui/material";
 
 const SkillCard = ({ logoUrl, name, description }) => {
   return (
-    <Stack spacing={-4.5} p={1} alignItems={"center"}>
+    <Stack spacing={-4} alignItems={"center"}>
       <Box
         width={75}
         height={75}
