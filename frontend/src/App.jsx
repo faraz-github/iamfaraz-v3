@@ -24,6 +24,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ResendVerification from "./pages/ResendVerification";
 import PendingApproval from "./pages/PendingApproval";
+import AboutMe from "./pages/AboutMe";
 
 // Components
 import Navbar from "./components/Navbar/Navbar";
@@ -55,6 +56,7 @@ function AppContent() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/resend" element={<ResendVerification />} />
             <Route path="/pending" element={<PendingApproval />} />
+            <Route path="/aboutme" element={<AboutMe />} />
           </Routes>
           <Loader />
           <ToastContainer theme="colored" />
