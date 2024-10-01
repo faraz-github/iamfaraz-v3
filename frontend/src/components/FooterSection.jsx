@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
+import dayjs from "dayjs";
 
 import GitHubIcon from "@mui/icons-material/GitHub";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import SectionBox from "./ui/SectionBox";
 import LayoutContainer from "./ui/LayoutContainer";
+import DocumentModal from "./ui/DocumentModal";
+
+import { policyContent } from "../constants/policyContent";
 
 const FooterSection = () => {
   // state
   const [socials, setSocials] = useState([]);
+  const [openTermsModal, setOpenTermsModal] = useState(false);
+  const [openPrivacyModal, setOpenPrivacyModal] = useState(false);
 
   // helpers
   const iconMapping = {
@@ -179,7 +185,8 @@ const FooterSection = () => {
                 variant="h5"
                 color={"primary.main"}
                 gutterBottom
-                sx={{ fontSize: { md: 24, xs: 20 } }}
+                sx={{ fontSize: { md: 24, xs: 20 }, cursor: "pointer" }}
+                onClick={() => setOpenTermsModal(true)}
               >
                 Terms & Conditions
               </Typography>
@@ -187,7 +194,8 @@ const FooterSection = () => {
                 variant="h5"
                 color={"primary.main"}
                 gutterBottom
-                sx={{ fontSize: { md: 24, xs: 20 } }}
+                sx={{ fontSize: { md: 24, xs: 20 }, cursor: "pointer" }}
+                onClick={() => setOpenPrivacyModal(true)}
               >
                 Privacy Policy
               </Typography>
@@ -243,18 +251,25 @@ const FooterSection = () => {
               color={"primary.light"}
               gutterBottom
             >
-              2024 © Faraz Ahmad️
+              {dayjs().year()} © Faraz Ahmad️
             </Typography>
           </Box>
         </Paper>
       </LayoutContainer>
+      <DocumentModal
+        open={openTermsModal}
+        handleClose={() => setOpenTermsModal(false)}
+        title={policyContent.termsOfUse.title}
+        content={policyContent.termsOfUse.content}
+      />
+      <DocumentModal
+        open={openPrivacyModal}
+        handleClose={() => setOpenPrivacyModal(false)}
+        title={policyContent.privacyPolicy.title}
+        content={policyContent.privacyPolicy.content}
+      />
     </SectionBox>
   );
 };
 
 export default FooterSection;
-
-// TODO features to add
-// 1. connect terms and condition and privacy policy modal
-// 2. make links clickable aka hyperlinks
-// 3. render dynamic year for copyright
