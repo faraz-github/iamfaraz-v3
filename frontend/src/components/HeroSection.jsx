@@ -49,7 +49,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <SectionBox id="hero">
+    <SectionBox id="hero" halfScreenHeight>
       <LayoutContainer>
         <Grid
           container

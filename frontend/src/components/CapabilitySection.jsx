@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 
 import LayoutContainer from "./ui/LayoutContainer";
@@ -7,11 +7,68 @@ import SectionHeading from "./ui/SectionHeading";
 import StyledLine from "./ui/StyledLine";
 
 import useDynamicMargin from "../hooks/useDynamicMargin";
+import useCurrentBreakpoint from "../hooks/useCurrentBreakpoint";
 
 const CapabilitySection = () => {
   const margin = useDynamicMargin();
+  const currentBreakpoint = useCurrentBreakpoint();
 
+  const leftComponentRef = useRef(null);
+  const middleComponentRef = useRef(null);
+  const rightComponentRef = useRef(null);
   const [isHovered, setIsHovered] = useState(null);
+
+  useEffect(() => {
+    if (currentBreakpoint !== "xs" && currentBreakpoint !== "sm") return; // Only run if on mobile
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const componentId = entry.target.dataset.component; // Use a data attribute to identify the component
+
+            if (!isHovered) {
+              // Check if isHovered is null
+              setIsHovered(componentId); // Set to the hovered component ID
+
+              // Remove effect after some time
+              setTimeout(() => {
+                setIsHovered(null);
+              }, 2000); // Adjust time as needed
+
+              // Stop observing this component after it has been triggered once
+              observer.unobserve(entry.target);
+            }
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    // Observe each component
+    if (leftComponentRef.current) {
+      observer.observe(leftComponentRef.current);
+    }
+    if (middleComponentRef.current) {
+      observer.observe(middleComponentRef.current);
+    }
+    if (rightComponentRef.current) {
+      observer.observe(rightComponentRef.current);
+    }
+
+    return () => {
+      // Cleanup
+      if (leftComponentRef.current) {
+        observer.unobserve(leftComponentRef.current);
+      }
+      if (middleComponentRef.current) {
+        observer.unobserve(middleComponentRef.current);
+      }
+      if (rightComponentRef.current) {
+        observer.unobserve(rightComponentRef.current);
+      }
+    };
+  }, []);
 
   return (
     <SectionBox id="capability">
@@ -61,6 +118,8 @@ const CapabilitySection = () => {
               }}
             >
               <Box
+                ref={leftComponentRef}
+                data-component="left"
                 bgcolor={"background.paper"}
                 sx={{
                   display: "flex",
@@ -147,6 +206,8 @@ const CapabilitySection = () => {
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
               <Box
+                ref={middleComponentRef}
+                data-component="middle"
                 bgcolor={"background.paper"}
                 sx={{
                   display: "flex",
@@ -248,6 +309,8 @@ const CapabilitySection = () => {
               }}
             >
               <Box
+                ref={rightComponentRef}
+                data-component="right"
                 bgcolor={"background.paper"}
                 sx={{
                   display: "flex",

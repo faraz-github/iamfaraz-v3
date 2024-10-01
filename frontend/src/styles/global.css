@@ -1,11 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Alumni+Sans:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lancelot&display=swap");
 
 :root {
   --font-family-primary: "Alumni Sans";
   --font-family-secondary: "Lancelot";
-  --White: #ffffff;
 }
 
 html,
@@ -24,6 +22,3 @@ a {
 * {
   box-sizing: border-box;
 }
-
-/* TODO features to add */
-/* 1. For the tablet and mobile view we have to calculate horizontalMarginWidth width*/

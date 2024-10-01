@@ -52,7 +52,7 @@ const ProjectSection = () => {
   }, []);
 
   return (
-    <SectionBox id="projects">
+    <SectionBox id="projects" halfScreenHeight>
       <LayoutContainer>
         <SectionHeading heading="Projects" />
         <Grid container spacing={2} p={1}>
